@@ -1,0 +1,42 @@
+﻿using AutoMapper;
+using TvojFilm.Services.Database;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TvojFilm.Services
+{
+    public class MappingProfile : Profile
+    {
+        public MappingProfile()
+        {
+
+
+            CreateMap<Drzave, Model.Drzave>().ReverseMap();
+
+            CreateMap<Gradovi, Model.Gradovi>().ReverseMap();
+
+            CreateMap<Zanrovi, Model.Zanrovi>().ReverseMap();
+
+            CreateMap<Uloge, Model.Uloge>().ReverseMap();
+
+            CreateMap<Redatelji, Model.Redatelji>().ReverseMap();
+
+            CreateMap<FilmoviService, Model.Filmovi>().ReverseMap();
+
+            CreateMap<Korisnici, Model.Korisnici>().ReverseMap();
+
+            CreateMap<FilmoviKomentari, Model.FilmoviKomentari>().ReverseMap();
+
+            CreateMap<FilmoviOcjene, Model.FilmoviOcjene>().ReverseMap();
+
+            CreateMap<KupnjaFilmova, Model.KupnjaFilmova>().ReverseMap();
+
+            CreateMap<PrijedloziFilmova, Model.PrijedloziFilmova>().ReverseMap();
+
+
+        }
+    }
+}
