@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using TvojFilm.Model;
+using TvojFilm.Model.Requests;
 using TvojFilm.Services;
 
 namespace TvojFilm.Controllers
@@ -16,9 +17,27 @@ namespace TvojFilm.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Korisnici> Get()
+        public List<Model.Korisnici> Get([FromQuery] KorisnikSearchRequest request)
         {
-            return _service.Get();
+            return _service.Get(request);
+        }
+
+        [HttpPost]
+        public Model.Korisnici Insert(KorisnikInsertRequest request)
+        {
+            return _service.Insert(request);
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            _service.Delete(id);
+        }
+
+        [HttpPut("{id}")]
+        public Model.Korisnici Update(int id, [FromBody] KorisnikUpdateRequest request)
+        {
+            return _service.Update(id, request);
         }
 
         [HttpGet("{id}")]

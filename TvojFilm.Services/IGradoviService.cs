@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TvojFilm.Model;
 using TvojFilm.Model.Requests;
 
 namespace TvojFilm.Services
 {
-    public interface IFilmoviService : ICRUDService<Model.Filmovi, FilmoviSearchRequest, FilmoviInsertRequest, FilmoviInsertRequest>
+    public interface IGradoviService : ICRUDService<Model.Gradovi, GradoviSearchRequest, GradoviInsertRequest, GradoviInsertRequest>
     {
     }
 }

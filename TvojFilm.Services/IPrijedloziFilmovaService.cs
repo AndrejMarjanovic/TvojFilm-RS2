@@ -7,7 +7,7 @@ using TvojFilm.Model.Requests;
 
 namespace TvojFilm.Services
 {
-    public interface IFilmoviService : ICRUDService<Model.Filmovi, FilmoviSearchRequest, FilmoviInsertRequest, FilmoviInsertRequest>
+    public interface IPrijedloziFilmovaService : ICRUDService<Model.PrijedloziFilmova, PrijedloziFilmovaSearchRequest, PrijedloziFilmovaInsertRequest, PrijedloziFilmovaInsertRequest>
     {
     }
 }

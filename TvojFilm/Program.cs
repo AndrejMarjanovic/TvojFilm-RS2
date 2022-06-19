@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using TvojFilm.Model.Requests;
 using TvojFilm.Services;
 using TvojFilm.Services.Database;
 
@@ -12,6 +14,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddTransient<IKorisniciService, KorisniciService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Uloge, UlogeSearchRequest, UlogeInsertRequest, UlogeInsertRequest>, UlogeService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Filmovi, FilmoviSearchRequest, FilmoviInsertRequest, FilmoviInsertRequest>, FilmoviService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Zanrovi, ZanroviSearchRequest, ZanroviInsertRequest, ZanroviInsertRequest>, ZanroviService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Drzave, DrzaveSearchRequest, DrzaveInsertRequest, DrzaveInsertRequest>, DrzaveService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Gradovi, GradoviSearchRequest, GradoviInsertRequest, GradoviInsertRequest>, GradoviService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.FilmoviKomentari, FilmoviKomentariSearchRequest, FilmoviKomentariInsertRequest, FilmoviKomentariInsertRequest>, FilmoviKomentariService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Redatelji, RedateljiSearchRequest, RedateljiInsertRequest, RedateljiInsertRequest>, RedateljiService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.PrijedloziFilmova, PrijedloziFilmovaSearchRequest, PrijedloziFilmovaInsertRequest, PrijedloziFilmovaInsertRequest>, PrijedloziFilmovaService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.KupnjaFilmova, KupnjaFilmovaSearchRequest, KupnjaFilmovaInsertRequest, KupnjaFilmovaInsertRequest>, KupnjaFilmovaService>();
+
 
 builder.Services.AddAutoMapper(typeof(IFilmoviService));
 

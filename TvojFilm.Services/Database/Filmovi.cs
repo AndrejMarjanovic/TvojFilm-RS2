@@ -15,10 +15,10 @@ namespace TvojFilm.Services.Database
         public int FilmId { get; set; }
         public string NazivFilma { get; set; } = null!;
         public DateTime Godina { get; set; } 
-        public byte[] Poster { get; set; } = null!;
+        public byte[]? Poster { get; set; } 
         public double Cijena { get; set; } 
         public double Ocjena { get; set; }
-        public byte[] FilmFile { get; set; } = null!;
+        public byte[]? FilmFile { get; set; }
         public string Opis { get; set; } = null!;
         public bool? FileDodan { get; set; }
 
