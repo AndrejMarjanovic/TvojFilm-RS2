@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TvojFilm.WinUI": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

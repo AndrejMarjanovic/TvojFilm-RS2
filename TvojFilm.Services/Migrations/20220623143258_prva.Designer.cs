@@ -12,8 +12,8 @@ using TvojFilm.Services.Database;
 namespace TvojFilm.Services.Migrations
 {
     [DbContext(typeof(TvojFilmContext))]
-    [Migration("20220618211302_popravka_Filmovi_tabele")]
-    partial class popravka_Filmovi_tabele
+    [Migration("20220623143258_prva")]
+    partial class prva
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -127,11 +127,11 @@ namespace TvojFilm.Services.Migrations
 
             modelBuilder.Entity("TvojFilm.Services.Database.FilmoviOcjene", b =>
                 {
-                    b.Property<int>("FIlmOcjenaId")
+                    b.Property<int>("FilmOcjenaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FIlmOcjenaId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FilmOcjenaId"), 1L, 1);
 
                     b.Property<DateTime>("DatumOcjene")
                         .HasColumnType("datetime2");
@@ -145,7 +145,7 @@ namespace TvojFilm.Services.Migrations
                     b.Property<double>("Ocjena")
                         .HasColumnType("float");
 
-                    b.HasKey("FIlmOcjenaId");
+                    b.HasKey("FilmOcjenaId");
 
                     b.HasIndex("FilmId");
 
@@ -397,7 +397,7 @@ namespace TvojFilm.Services.Migrations
                     b.HasOne("TvojFilm.Services.Database.Korisnici", "Korisnik")
                         .WithMany()
                         .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Film");
@@ -416,7 +416,7 @@ namespace TvojFilm.Services.Migrations
                     b.HasOne("TvojFilm.Services.Database.Korisnici", "Korisnik")
                         .WithMany()
                         .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Film");
@@ -465,7 +465,7 @@ namespace TvojFilm.Services.Migrations
                     b.HasOne("TvojFilm.Services.Database.Korisnici", "Korisnik")
                         .WithMany()
                         .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Film");
@@ -478,7 +478,7 @@ namespace TvojFilm.Services.Migrations
                     b.HasOne("TvojFilm.Services.Database.Korisnici", "Korisnik")
                         .WithMany()
                         .HasForeignKey("KorisnikId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Korisnik");

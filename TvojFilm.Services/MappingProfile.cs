@@ -37,6 +37,7 @@ namespace TvojFilm.Services
             CreateMap<FilmoviKomentari, Model.Requests.FilmoviKomentariInsertRequest>().ReverseMap();
             CreateMap<FilmoviKomentari, Model.FilmoviKomentari>().ReverseMap();
 
+            CreateMap<FilmoviOcjene, Model.Requests.FilmoviOcjeneInsertRequest>().ReverseMap();
             CreateMap<FilmoviOcjene, Model.FilmoviOcjene>().ReverseMap();
 
             CreateMap<KupnjaFilmova, Model.Requests.KupnjaFilmovaInsertRequest>().ReverseMap();

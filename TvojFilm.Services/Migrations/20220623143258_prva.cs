@@ -92,10 +92,10 @@ namespace TvojFilm.Services.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NazivFilma = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Godina = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Poster = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Poster = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Cijena = table.Column<double>(type: "float", nullable: false),
                     Ocjena = table.Column<double>(type: "float", nullable: false),
-                    FilmFile = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    FilmFile = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FileDodan = table.Column<bool>(type: "bit", nullable: true),
                     RedateljId = table.Column<int>(type: "int", nullable: false),
@@ -169,14 +169,14 @@ namespace TvojFilm.Services.Migrations
                     Komentar = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DatumKomentara = table.Column<DateTime>(type: "datetime2", nullable: false),
                     KorisnikId = table.Column<int>(type: "int", nullable: false),
-                    Knjiga_ID = table.Column<int>(type: "int", nullable: false)
+                    FilmId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FilmoviKomentari", x => x.FilmKomentarId);
                     table.ForeignKey(
-                        name: "FK_FilmoviKomentari_Filmovi_Knjiga_ID",
-                        column: x => x.Knjiga_ID,
+                        name: "FK_FilmoviKomentari_Filmovi_FilmId",
+                        column: x => x.FilmId,
                         principalTable: "Filmovi",
                         principalColumn: "FilmId",
                         onDelete: ReferentialAction.Cascade);
@@ -185,14 +185,14 @@ namespace TvojFilm.Services.Migrations
                         column: x => x.KorisnikId,
                         principalTable: "Korisnici",
                         principalColumn: "KorisnikId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
                 name: "FilmoviOcjene",
                 columns: table => new
                 {
-                    FIlmOcjenaId = table.Column<int>(type: "int", nullable: false)
+                    FilmOcjenaId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Ocjena = table.Column<double>(type: "float", nullable: false),
                     DatumOcjene = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -201,7 +201,7 @@ namespace TvojFilm.Services.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FilmoviOcjene", x => x.FIlmOcjenaId);
+                    table.PrimaryKey("PK_FilmoviOcjene", x => x.FilmOcjenaId);
                     table.ForeignKey(
                         name: "FK_FilmoviOcjene_Filmovi_FilmId",
                         column: x => x.FilmId,
@@ -213,7 +213,7 @@ namespace TvojFilm.Services.Migrations
                         column: x => x.KorisnikId,
                         principalTable: "Korisnici",
                         principalColumn: "KorisnikId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,7 +241,7 @@ namespace TvojFilm.Services.Migrations
                         column: x => x.KorisnikId,
                         principalTable: "Korisnici",
                         principalColumn: "KorisnikId",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -265,7 +265,7 @@ namespace TvojFilm.Services.Migrations
                         column: x => x.KorisnikId,
                         principalTable: "Korisnici",
                         principalColumn: "KorisnikId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -284,9 +284,9 @@ namespace TvojFilm.Services.Migrations
                 column: "ZanrId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FilmoviKomentari_Knjiga_ID",
+                name: "IX_FilmoviKomentari_FilmId",
                 table: "FilmoviKomentari",
-                column: "Knjiga_ID");
+                column: "FilmId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FilmoviKomentari_KorisnikId",

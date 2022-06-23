@@ -120,9 +120,26 @@ namespace TvojFilm.Services
         public void Delete(int id)
         {
             var entity = db.Korisnici.Find(id);
+
             db.Remove(entity);
             db.SaveChanges();
 
         }
+        public Model.Korisnici Login(string username, string password)
+        {
+            var user = db.Korisnici.Include(x => x.Uloga).Include(x => x.Grad.Drzava).FirstOrDefault(x => x.Username == username);
+
+            if (user != null)
+            {
+                var newHash = GenerateHash(user.PasswordSalt, password);
+
+                if (newHash == user.PasswordHash)
+                {
+                    return mapper.Map<Model.Korisnici>(user);
+                }
+            }
+            return null;
+        }
     }
+
 }

@@ -15,6 +15,6 @@ namespace TvojFilm.Services
         public Korisnici Insert(KorisnikInsertRequest request);
         public Korisnici Update(int id, KorisnikUpdateRequest request);
         public void Delete(int id);
-
+        public Model.Korisnici Login(string username, string pass);
     }
 }

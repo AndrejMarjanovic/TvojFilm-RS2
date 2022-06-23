@@ -7,11 +7,11 @@ namespace TvojFilm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class KorisnikController : ControllerBase
+    public class KorisniciController : ControllerBase
     {
 
         private readonly IKorisniciService _service;
-        public KorisnikController(IKorisniciService service)
+        public KorisniciController(IKorisniciService service)
         {
             _service = service;
         }

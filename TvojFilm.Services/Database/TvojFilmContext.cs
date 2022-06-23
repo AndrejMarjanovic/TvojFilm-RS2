@@ -19,6 +19,27 @@ namespace TvojFilm.Services.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<PrijedloziFilmova>()
+
+                   .HasOne(pt => pt.Korisnik)
+
+                  .WithMany()
+
+                 .HasForeignKey(pt => pt.KorisnikId)
+
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<FilmoviKomentari>()
+                .HasOne(p => p.Korisnik).WithMany().HasForeignKey(p => p.KorisnikId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<FilmoviOcjene>()
+                .HasOne(p => p.Korisnik).WithMany().HasForeignKey(p => p.KorisnikId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<KupnjaFilmova>()
+                .HasOne(p => p.Korisnik).WithMany().HasForeignKey(p => p.KorisnikId)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
 

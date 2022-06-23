@@ -11,7 +11,7 @@ namespace TvojFilm.Services.Database
     public class FilmoviOcjene
     {
         [Key]
-        public int FIlmOcjenaId { get; set; }
+        public int FilmOcjenaId { get; set; }
         public double Ocjena { get; set; }
         public DateTime DatumOcjene { get; set; }
 

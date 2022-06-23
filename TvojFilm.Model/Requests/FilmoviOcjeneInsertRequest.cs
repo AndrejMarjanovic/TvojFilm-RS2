@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace TvojFilm.Model
+namespace TvojFilm.Model.Requests
 {
-    public class FilmoviOcjene
+    public class FilmoviOcjeneInsertRequest
     {
         public int FilmOcjenaId { get; set; }
         public double Ocjena { get; set; }
         public DateTime DatumOcjene { get; set; }
-
         public int KorisnikId { get; set; }
-        public virtual Korisnici Korisnik { get; set; } 
-
         public int FilmId { get; set; }
-        public virtual Filmovi Film { get; set; }
     }
 }

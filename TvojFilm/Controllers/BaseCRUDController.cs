@@ -16,19 +16,19 @@ namespace TvojFilm.Controllers
         {
             _crudService = service;
         }
-   
+        [Authorize]
         [HttpPost]
         public T Insert(TInsert request)
         {
             return _crudService.Insert(request);
         }
-       
+        [Authorize]
         [HttpPut("{id}")]
         public T Update(int id, TUpdate request)
         {
             return _crudService.Update(id, request);
         }
-       
+        [Authorize]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
