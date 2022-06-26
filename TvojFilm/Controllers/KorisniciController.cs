@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TvojFilm.Model;
 using TvojFilm.Model.Requests;
@@ -7,6 +8,7 @@ namespace TvojFilm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class KorisniciController : ControllerBase
     {
 

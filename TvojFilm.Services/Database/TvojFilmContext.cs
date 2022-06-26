@@ -41,12 +41,17 @@ namespace TvojFilm.Services.Database
                 .HasOne(p => p.Korisnik).WithMany().HasForeignKey(p => p.KorisnikId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<KupnjaFilmova>()
+                .HasOne(p => p.Korisnik).WithMany().HasForeignKey(p => p.KorisnikId)
+                .OnDelete(DeleteBehavior.Restrict);
+
         }
 
         public DbSet<Drzave> Drzave { get; set; } = null!;
         public DbSet<Gradovi> Gradovi { get; set; } = null!;
         public DbSet<Filmovi> Filmovi { get; set; } = null!;
         public DbSet<Redatelji> Redatelji { get; set; } = null!;
+        public DbSet<Glumci> Glumci { get; set; } = null!;
         public DbSet<Korisnici> Korisnici { get; set; } = null!;
         public DbSet<Uloge> Uloge { get; set; } = null!;
         public DbSet<FilmoviKomentari> FilmoviKomentari { get; set; } = null!;

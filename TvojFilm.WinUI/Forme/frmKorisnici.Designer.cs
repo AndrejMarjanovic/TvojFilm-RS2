@@ -64,6 +64,7 @@
             this.groupBox1.Controls.Add(this.txtPrezime);
             this.groupBox1.Controls.Add(this.txtIme);
             this.groupBox1.Controls.Add(this.txtUsername);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(878, 80);
@@ -109,6 +110,7 @@
             // 
             // button1
             // 
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.button1.Location = new System.Drawing.Point(742, 50);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 23);
@@ -154,6 +156,7 @@
             // 
             this.dgvKorisnici.AllowUserToAddRows = false;
             this.dgvKorisnici.AllowUserToDeleteRows = false;
+            this.dgvKorisnici.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.dgvKorisnici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvKorisnici.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Username,
@@ -241,30 +244,34 @@
             // 
             // Uredi
             // 
-            this.Uredi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Uredi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Uredi.HeaderText = "Uredi";
             this.Uredi.Name = "Uredi";
             this.Uredi.ReadOnly = true;
             this.Uredi.Text = "Uredi";
             this.Uredi.UseColumnTextForButtonValue = true;
+            this.Uredi.Width = 41;
             // 
             // Ukloni
             // 
-            this.Ukloni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Ukloni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Ukloni.HeaderText = "Ukloni";
             this.Ukloni.Name = "Ukloni";
             this.Ukloni.ReadOnly = true;
             this.Ukloni.Text = "Ukloni";
             this.Ukloni.UseColumnTextForButtonValue = true;
+            this.Ukloni.Width = 47;
             // 
             // frmKorisnici
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(53)))), ((int)(((byte)(96)))));
             this.ClientSize = new System.Drawing.Size(902, 450);
             this.Controls.Add(this.dgvKorisnici);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmKorisnici";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Korisnici";
             this.Load += new System.EventHandler(this.frmKorisnici_Load);
             this.groupBox1.ResumeLayout(false);

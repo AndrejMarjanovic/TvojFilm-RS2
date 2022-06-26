@@ -22,7 +22,7 @@ namespace TvojFilm.WinUI.Forme
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            if (Validate())
+            if (Validacija())
             {
                 APIService.Username = txtUsername.Text;
                 APIService.Password = txtPassword.Text;
@@ -56,7 +56,7 @@ namespace TvojFilm.WinUI.Forme
             }
         }
 
-        private bool Validate()
+        private bool Validacija()
         {
             if (string.IsNullOrEmpty(txtUsername.Text))
             {

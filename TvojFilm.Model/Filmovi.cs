@@ -19,6 +19,9 @@ namespace TvojFilm.Model
         public int RedateljId { get; set; }
         public virtual Redatelji Redatelj { get; set; }
 
+        public int GlumacId { get; set; }
+        public virtual Glumci Glumac { get; set; }
+
         public int ZanrId { get; set; }
         public virtual Zanrovi Zanr { get; set; }
 

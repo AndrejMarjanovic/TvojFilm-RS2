@@ -50,11 +50,6 @@ namespace TvojFilm.WinUI.Forme
                     pbSlika.Image = ImgHelper.FromByteToImage(korisnici.Slika);
                 }
 
-                //tbPass.Hide();
-                //tbPotvrda.Hide();
-                //lblLozinka.Hide();
-                //lblPotvrda.Hide();
-
 
                 foreach (Model.Gradovi item in cbGrad.Items)
                 {
@@ -90,7 +85,7 @@ namespace TvojFilm.WinUI.Forme
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
-            if (await Validate())
+            if (await Validacija())
             {
 
                 KorisnikInsertRequest request = new KorisnikInsertRequest()
@@ -132,7 +127,7 @@ namespace TvojFilm.WinUI.Forme
             }
         }
 
-        private async Task<bool> Validate()
+        private async Task<bool> Validacija()
         {
             var result = await _korisnici.Get<List<Model.Korisnici>>(null);
             int id = _id ?? 0;

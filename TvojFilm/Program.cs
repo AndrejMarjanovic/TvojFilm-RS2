@@ -42,6 +42,7 @@ builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Gradovi, GradoviSearch
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.FilmoviKomentari, FilmoviKomentariSearchRequest, FilmoviKomentariInsertRequest, FilmoviKomentariInsertRequest>, FilmoviKomentariService>();
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.FilmoviOcjene, FilmoviOcjeneSearchRequest, FilmoviOcjeneInsertRequest, FilmoviOcjeneInsertRequest>, FilmoviOcjeneService>();
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Redatelji, RedateljiSearchRequest, RedateljiInsertRequest, RedateljiInsertRequest>, RedateljiService>();
+builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Glumci, GlumciSearchRequest, GlumciInsertRequest, GlumciInsertRequest>, GlumciService>();
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.PrijedloziFilmova, PrijedloziFilmovaSearchRequest, PrijedloziFilmovaInsertRequest, PrijedloziFilmovaInsertRequest>, PrijedloziFilmovaService>();
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.KupnjaFilmova, KupnjaFilmovaSearchRequest, KupnjaFilmovaInsertRequest, KupnjaFilmovaInsertRequest>, KupnjaFilmovaService>();
 

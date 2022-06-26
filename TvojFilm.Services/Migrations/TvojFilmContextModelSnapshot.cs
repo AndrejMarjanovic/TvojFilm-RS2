@@ -59,6 +59,9 @@ namespace TvojFilm.Services.Migrations
                     b.Property<byte[]>("FilmFile")
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<int>("GlumacId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("Godina")
                         .HasColumnType("datetime2");
 
@@ -85,6 +88,8 @@ namespace TvojFilm.Services.Migrations
                     b.HasKey("FilmId");
 
                     b.HasIndex("DrzavaId");
+
+                    b.HasIndex("GlumacId");
 
                     b.HasIndex("RedateljId");
 
@@ -150,6 +155,30 @@ namespace TvojFilm.Services.Migrations
                     b.HasIndex("KorisnikId");
 
                     b.ToTable("FilmoviOcjene");
+                });
+
+            modelBuilder.Entity("TvojFilm.Services.Database.Glumci", b =>
+                {
+                    b.Property<int>("GlumacId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("GlumacId"), 1L, 1);
+
+                    b.Property<DateTime>("DatumRodjenja")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Ime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prezime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("GlumacId");
+
+                    b.ToTable("Glumci");
                 });
 
             modelBuilder.Entity("TvojFilm.Services.Database.Gradovi", b =>
@@ -365,6 +394,12 @@ namespace TvojFilm.Services.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("TvojFilm.Services.Database.Glumci", "Glumac")
+                        .WithMany()
+                        .HasForeignKey("GlumacId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("TvojFilm.Services.Database.Redatelji", "Redatelj")
                         .WithMany()
                         .HasForeignKey("RedateljId")
@@ -378,6 +413,8 @@ namespace TvojFilm.Services.Migrations
                         .IsRequired();
 
                     b.Navigation("Drzava");
+
+                    b.Navigation("Glumac");
 
                     b.Navigation("Redatelj");
 

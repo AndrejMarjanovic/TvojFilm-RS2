@@ -13,7 +13,7 @@ namespace TvojFilm.Model.Requests
         public string NazivFilma { get; set; }
 
         [Required(ErrorMessage = "Unesite datum izlaska filma.")]
-        public DateTime DatumIzdavanja { get; set; }
+        public DateTime Godina { get; set; }
 
         public byte[] Poster { get; set; }
         [Required(ErrorMessage = "Unesite cijenu filma.")]
@@ -26,6 +26,7 @@ namespace TvojFilm.Model.Requests
         public bool FileDodan { get; set; }
 
         public int RedateljId { get; set; }
+        public int GlumacId { get; set; }
         public int ZanrId { get; set; }
         public int DrzavaId { get; set; }
 

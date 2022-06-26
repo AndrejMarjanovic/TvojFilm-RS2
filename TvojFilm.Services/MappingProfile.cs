@@ -27,6 +27,9 @@ namespace TvojFilm.Services
 
             CreateMap<Redatelji, Model.Requests.RedateljiInsertRequest>().ReverseMap();
             CreateMap<Redatelji, Model.Redatelji>().ReverseMap();
+            
+            CreateMap<Glumci, Model.Requests.GlumciInsertRequest>().ReverseMap();
+            CreateMap<Glumci, Model.Glumci>().ReverseMap();
 
             CreateMap<Filmovi, Model.Requests.FilmoviInsertRequest>().ReverseMap();
             CreateMap<Filmovi, Model.Filmovi>().ReverseMap();

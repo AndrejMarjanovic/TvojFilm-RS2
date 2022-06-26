@@ -63,6 +63,7 @@
             this.pbSlika.Location = new System.Drawing.Point(12, 12);
             this.pbSlika.Name = "pbSlika";
             this.pbSlika.Size = new System.Drawing.Size(168, 155);
+            this.pbSlika.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbSlika.TabIndex = 0;
             this.pbSlika.TabStop = false;
             this.pbSlika.Click += new System.EventHandler(this.pbSlika_Click);
@@ -288,6 +289,7 @@
             this.Controls.Add(this.btnSlika);
             this.Controls.Add(this.pbSlika);
             this.Name = "frmDodajKorisnika";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmDodajKorisnika";
             this.Load += new System.EventHandler(this.frmDodajKorisnika_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbSlika)).EndInit();

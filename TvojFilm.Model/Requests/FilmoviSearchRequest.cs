@@ -8,6 +8,7 @@ namespace TvojFilm.Model.Requests
     {
         public string NazivFilma { get; set; }
         public string Redatelj { get; set; }
+        public string Glumac { get; set; }
         public int? ZanrId { get; set; }
         public int? DrzavaId { get; set; }
     }

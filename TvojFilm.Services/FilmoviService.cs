@@ -17,7 +17,7 @@ namespace TvojFilm.Services
         }
         public override List<Model.Filmovi> Get(FilmoviSearchRequest search)
         {
-            var query = _db.Filmovi.Include(x => x.Redatelj).Include(x => x.Zanr).Include(x => x.Drzava).AsQueryable();
+            var query = _db.Filmovi.Include(x => x.Redatelj).Include(x => x.Glumac).Include(x => x.Zanr).Include(x => x.Drzava).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(search?.NazivFilma))
             {
@@ -26,6 +26,10 @@ namespace TvojFilm.Services
             if (!string.IsNullOrWhiteSpace(search?.Redatelj))
             {
                 query = query.Where(x => x.Redatelj.Ime.ToLower().Contains(search.Redatelj.ToLower()) || x.Redatelj.Prezime.ToLower().Contains(search.Redatelj.ToLower()));
+            }
+            if (!string.IsNullOrWhiteSpace(search?.Glumac))
+            {
+                query = query.Where(x => x.Glumac.Ime.ToLower().Contains(search.Glumac.ToLower()) || x.Glumac.Prezime.ToLower().Contains(search.Glumac.ToLower()));
             }
             if (!string.IsNullOrWhiteSpace(search?.ZanrId.ToString()))
             {

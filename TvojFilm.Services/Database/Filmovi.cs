@@ -26,6 +26,10 @@ namespace TvojFilm.Services.Database
         public int RedateljId { get; set; }
         public virtual Redatelji Redatelj { get; set; } = null!;
 
+        [ForeignKey(nameof(Glumac))]
+        public int GlumacId { get; set; }
+        public virtual Glumci Glumac { get; set; } = null!;
+
         [ForeignKey(nameof(Zanr))]
         public int ZanrId { get; set; }
         public virtual Zanrovi Zanr { get; set; } = null!;

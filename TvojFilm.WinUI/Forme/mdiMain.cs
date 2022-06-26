@@ -101,5 +101,73 @@ namespace TvojFilm.WinUI.Forme
             frm.MdiParent = this;
             frm.Show();
         }
+
+        private void filmoviToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmFilmovi frm = new frmFilmovi();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void redateljiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmRedatelji frm = new frmRedatelji();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void glumciToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGlumci frm = new frmGlumci();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void odjavaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogin frm = new frmLogin();
+            this.Close();
+            frm.Show();
+        }
+
+        private void državeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDrzave frm = new frmDrzave();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void gradoviToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmGradovi frm = new frmGradovi();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void žanroviToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmZanrovi frm = new frmZanrovi();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void komentariToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmKomentari frm = new frmKomentari();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void sugestijeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSugestije frm = new frmSugestije();
+            frm.MdiParent = this;
+            frm.Show();
+        }
+
+        private void mdiMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

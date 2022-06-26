@@ -23,6 +23,21 @@ namespace TvojFilm.Services.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Glumci",
+                columns: table => new
+                {
+                    GlumacId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Ime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Prezime = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DatumRodjenja = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Glumci", x => x.GlumacId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Redatelji",
                 columns: table => new
                 {
@@ -99,6 +114,7 @@ namespace TvojFilm.Services.Migrations
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FileDodan = table.Column<bool>(type: "bit", nullable: true),
                     RedateljId = table.Column<int>(type: "int", nullable: false),
+                    GlumacId = table.Column<int>(type: "int", nullable: false),
                     ZanrId = table.Column<int>(type: "int", nullable: false),
                     DrzavaId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -110,6 +126,12 @@ namespace TvojFilm.Services.Migrations
                         column: x => x.DrzavaId,
                         principalTable: "Drzave",
                         principalColumn: "DrzavaId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Filmovi_Glumci_GlumacId",
+                        column: x => x.GlumacId,
+                        principalTable: "Glumci",
+                        principalColumn: "GlumacId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Filmovi_Redatelji_RedateljId",
@@ -274,6 +296,11 @@ namespace TvojFilm.Services.Migrations
                 column: "DrzavaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Filmovi_GlumacId",
+                table: "Filmovi",
+                column: "GlumacId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Filmovi_RedateljId",
                 table: "Filmovi",
                 column: "RedateljId");
@@ -353,6 +380,9 @@ namespace TvojFilm.Services.Migrations
 
             migrationBuilder.DropTable(
                 name: "Korisnici");
+
+            migrationBuilder.DropTable(
+                name: "Glumci");
 
             migrationBuilder.DropTable(
                 name: "Redatelji");
