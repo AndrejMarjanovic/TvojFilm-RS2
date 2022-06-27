@@ -66,7 +66,7 @@
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(7, 60, 0, 2);
             this.menuStrip.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.menuStrip.Size = new System.Drawing.Size(124, 526);
+            this.menuStrip.Size = new System.Drawing.Size(127, 526);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "MenuStrip";
             // 
@@ -74,7 +74,7 @@
             // 
             this.korisniciToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.korisniciToolStripMenuItem.Name = "korisniciToolStripMenuItem";
-            this.korisniciToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.korisniciToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.korisniciToolStripMenuItem.Text = "Korisnici";
             this.korisniciToolStripMenuItem.Click += new System.EventHandler(this.korisniciToolStripMenuItem_Click);
             // 
@@ -82,7 +82,7 @@
             // 
             this.filmoviToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.filmoviToolStripMenuItem.Name = "filmoviToolStripMenuItem";
-            this.filmoviToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.filmoviToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.filmoviToolStripMenuItem.Text = "Filmovi";
             this.filmoviToolStripMenuItem.Click += new System.EventHandler(this.filmoviToolStripMenuItem_Click);
             // 
@@ -90,7 +90,7 @@
             // 
             this.redateljiToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.redateljiToolStripMenuItem.Name = "redateljiToolStripMenuItem";
-            this.redateljiToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.redateljiToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.redateljiToolStripMenuItem.Text = "Redatelji";
             this.redateljiToolStripMenuItem.Click += new System.EventHandler(this.redateljiToolStripMenuItem_Click);
             // 
@@ -98,7 +98,7 @@
             // 
             this.glumciToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.glumciToolStripMenuItem.Name = "glumciToolStripMenuItem";
-            this.glumciToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.glumciToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.glumciToolStripMenuItem.Text = "Glumci";
             this.glumciToolStripMenuItem.Click += new System.EventHandler(this.glumciToolStripMenuItem_Click);
             // 
@@ -106,7 +106,7 @@
             // 
             this.žanroviToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.žanroviToolStripMenuItem.Name = "žanroviToolStripMenuItem";
-            this.žanroviToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.žanroviToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.žanroviToolStripMenuItem.Text = "Žanrovi";
             this.žanroviToolStripMenuItem.Click += new System.EventHandler(this.žanroviToolStripMenuItem_Click);
             // 
@@ -114,7 +114,7 @@
             // 
             this.državeToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.državeToolStripMenuItem.Name = "državeToolStripMenuItem";
-            this.državeToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.državeToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.državeToolStripMenuItem.Text = "Države";
             this.državeToolStripMenuItem.Click += new System.EventHandler(this.državeToolStripMenuItem_Click);
             // 
@@ -122,7 +122,7 @@
             // 
             this.gradoviToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.gradoviToolStripMenuItem.Name = "gradoviToolStripMenuItem";
-            this.gradoviToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.gradoviToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.gradoviToolStripMenuItem.Text = "Gradovi";
             this.gradoviToolStripMenuItem.Click += new System.EventHandler(this.gradoviToolStripMenuItem_Click);
             // 
@@ -130,7 +130,7 @@
             // 
             this.komentariToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.komentariToolStripMenuItem.Name = "komentariToolStripMenuItem";
-            this.komentariToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.komentariToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.komentariToolStripMenuItem.Text = "Komentari";
             this.komentariToolStripMenuItem.Click += new System.EventHandler(this.komentariToolStripMenuItem_Click);
             // 
@@ -138,7 +138,7 @@
             // 
             this.sugestijeToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.sugestijeToolStripMenuItem.Name = "sugestijeToolStripMenuItem";
-            this.sugestijeToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.sugestijeToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.sugestijeToolStripMenuItem.Text = "Sugestije";
             this.sugestijeToolStripMenuItem.Click += new System.EventHandler(this.sugestijeToolStripMenuItem_Click);
             // 
@@ -146,7 +146,7 @@
             // 
             this.odjavaToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(89)))), ((int)(((byte)(139)))), ((int)(((byte)(215)))));
             this.odjavaToolStripMenuItem.Name = "odjavaToolStripMenuItem";
-            this.odjavaToolStripMenuItem.Size = new System.Drawing.Size(109, 29);
+            this.odjavaToolStripMenuItem.Size = new System.Drawing.Size(112, 29);
             this.odjavaToolStripMenuItem.Text = "Odjava";
             this.odjavaToolStripMenuItem.Click += new System.EventHandler(this.odjavaToolStripMenuItem_Click);
             // 
@@ -165,7 +165,6 @@
             this.Name = "mdiMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Home";
-            this.Load += new System.EventHandler(this.mdiMain_Load);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);

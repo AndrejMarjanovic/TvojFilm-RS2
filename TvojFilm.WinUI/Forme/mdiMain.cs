@@ -165,9 +165,5 @@ namespace TvojFilm.WinUI.Forme
             frm.Show();
         }
 
-        private void mdiMain_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

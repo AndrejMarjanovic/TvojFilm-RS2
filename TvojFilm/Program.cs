@@ -45,6 +45,7 @@ builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Redatelji, RedateljiSe
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.Glumci, GlumciSearchRequest, GlumciInsertRequest, GlumciInsertRequest>, GlumciService>();
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.PrijedloziFilmova, PrijedloziFilmovaSearchRequest, PrijedloziFilmovaInsertRequest, PrijedloziFilmovaInsertRequest>, PrijedloziFilmovaService>();
 builder.Services.AddTransient<ICRUDService<TvojFilm.Model.KupnjaFilmova, KupnjaFilmovaSearchRequest, KupnjaFilmovaInsertRequest, KupnjaFilmovaInsertRequest>, KupnjaFilmovaService>();
+builder.Services.AddTransient<IRecommendedService, RecomendedService>();
 
 builder.Services.AddAuthentication("BasicAuthentication")
     .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
