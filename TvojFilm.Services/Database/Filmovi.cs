@@ -18,9 +18,8 @@ namespace TvojFilm.Services.Database
         public byte[]? Poster { get; set; } 
         public double Cijena { get; set; } 
         public double Ocjena { get; set; }
-        public byte[]? FilmFile { get; set; }
+        public string FilmLink { get; set; } = null!;
         public string Opis { get; set; } = null!;
-        public bool? FileDodan { get; set; }
 
         [ForeignKey(nameof(Redatelj))]
         public int RedateljId { get; set; }

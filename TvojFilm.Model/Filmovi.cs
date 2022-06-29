@@ -12,9 +12,8 @@ namespace TvojFilm.Model
         public byte[] Poster { get; set; }
         public double Cijena { get; set; }
         public double Ocjena { get; set; }
-        public byte[] FilmFile { get; set; }
+        public string FilmLink { get; set; }
         public string Opis { get; set; }
-        public bool FileDodan { get; set; }
 
         public int RedateljId { get; set; }
         public virtual Redatelji Redatelj { get; set; }

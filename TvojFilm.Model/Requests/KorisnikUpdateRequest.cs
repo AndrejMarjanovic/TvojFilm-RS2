@@ -15,7 +15,6 @@ namespace TvojFilm.Model.Requests
         public DateTime DatumRodjenja { get; set; }
         public int GradId { get; set; }
         public int UlogaId { get; set; }
-        public byte[] Slika { get; set; }
         public string Username { get; set; }
     }
 }

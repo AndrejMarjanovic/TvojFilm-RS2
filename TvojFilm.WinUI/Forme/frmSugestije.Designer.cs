@@ -35,7 +35,6 @@
             this.Sugestija = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Korisnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Odobri = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Ukloni = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSugestije)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -51,7 +50,6 @@
             this.Sugestija,
             this.Korisnik,
             this.Datum,
-            this.Odobri,
             this.Ukloni});
             this.dgvSugestije.Location = new System.Drawing.Point(3, 85);
             this.dgvSugestije.Name = "dgvSugestije";
@@ -114,17 +112,6 @@
             this.Datum.Name = "Datum";
             this.Datum.ReadOnly = true;
             // 
-            // Odobri
-            // 
-            this.Odobri.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Odobri.DataPropertyName = "Odgovoren";
-            this.Odobri.HeaderText = "Odobri";
-            this.Odobri.Name = "Odobri";
-            this.Odobri.ReadOnly = true;
-            this.Odobri.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Odobri.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Odobri.Width = 69;
-            // 
             // Ukloni
             // 
             this.Ukloni.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -163,7 +150,6 @@
         private DataGridViewTextBoxColumn Sugestija;
         private DataGridViewTextBoxColumn Korisnik;
         private DataGridViewTextBoxColumn Datum;
-        private DataGridViewCheckBoxColumn Odobri;
         private DataGridViewButtonColumn Ukloni;
     }
 }

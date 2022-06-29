@@ -47,7 +47,6 @@
             this.Zanr = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ocjena = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cijena = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FileDodan = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.Uredi = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Ukloni = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1.SuspendLayout();
@@ -168,7 +167,6 @@
             this.Zanr,
             this.Ocjena,
             this.Cijena,
-            this.FileDodan,
             this.Uredi,
             this.Ukloni});
             this.dgvFilmovi.Location = new System.Drawing.Point(12, 98);
@@ -246,15 +244,6 @@
             this.Cijena.ReadOnly = true;
             this.Cijena.Width = 65;
             // 
-            // FileDodan
-            // 
-            this.FileDodan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FileDodan.DataPropertyName = "FileDodan";
-            this.FileDodan.HeaderText = "Video file";
-            this.FileDodan.Name = "FileDodan";
-            this.FileDodan.ReadOnly = true;
-            this.FileDodan.Width = 56;
-            // 
             // Uredi
             // 
             this.Uredi.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
@@ -315,7 +304,6 @@
         private DataGridViewTextBoxColumn Zanr;
         private DataGridViewTextBoxColumn Ocjena;
         private DataGridViewTextBoxColumn Cijena;
-        private DataGridViewCheckBoxColumn FileDodan;
         private DataGridViewButtonColumn Uredi;
         private DataGridViewButtonColumn Ukloni;
     }

@@ -45,11 +45,10 @@ namespace TvojFilm.WinUI.Forme
                 tbBroj.Text = korisnici.Telefon;
                 dtp.Value = korisnici.DatumRodjenja;
 
-                if (korisnici.Slika.Length > 0)
-                {
-                    pbSlika.Image = ImgHelper.FromByteToImage(korisnici.Slika);
-                }
-
+                tbPass.Hide();
+                tbPotvrda.Hide();
+                label9.Hide();
+                label10.Hide();
 
                 foreach (Model.Gradovi item in cbGrad.Items)
                 {
@@ -103,23 +102,7 @@ namespace TvojFilm.WinUI.Forme
 
                 };
 
-                if (_id.HasValue)
-                {
-
-                    if (pbSlika.Image != null)
-                        request.Slika = ImgHelper.FromImageToByte(pbSlika.Image);
-                    await _korisnici.Update<Model.Korisnici>(_id, request);
-
-                }
-                else
-                {
-                    if (pbSlika.Image != null)
-                        request.Slika = ImgHelper.FromImageToByte(pbSlika.Image);
-                    else
-                        request.Slika = ImgHelper.FromImageToByte(TvojFilm.WinUI.Properties.Resources.korisnik);
-                    await _korisnici.Insert<Model.Korisnici>(request);
-                }
-                MessageBox.Show("Operacija uspješna!");
+                MessageBox.Show("Korisnik dodan!");
                 this.Close();
                 if (_dgvKorisnici != null)
                     _dgvKorisnici.DataSource = await _korisnici.Get<List<Model.Korisnici>>(null);
@@ -206,7 +189,7 @@ namespace TvojFilm.WinUI.Forme
                 foreach (var item in result)
                     if (item.Username == tbUsername.Text && item.KorisnikId != id)
                     {
-                        err.SetError(tbUsername, "Korisničko ime se je zauzeto!");
+                        err.SetError(tbUsername, "Korisničko ime je zauzeto!");
                         return false;
                     }
             }
@@ -236,28 +219,6 @@ namespace TvojFilm.WinUI.Forme
             return true;
         }
 
-        private void btnSlika_Click(object sender, EventArgs e)
-        {
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                string putanja = ofd.FileName;
-                Image slika = Image.FromFile(putanja);
-                pbSlika.Image = slika;
-
-            }
-        }
-
-        private void pbSlika_Click(object sender, EventArgs e)
-        {
-
-            if (ofd.ShowDialog() == DialogResult.OK)
-            {
-                string putanja = ofd.FileName;
-                Image slika = Image.FromFile(putanja);
-                pbSlika.Image = slika;
-            }
-
-        }
 
     }
 }

@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.dgvZanrovi = new System.Windows.Forms.DataGridView();
+            this.Zanr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Uredi = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Ukloni = new System.Windows.Forms.DataGridViewButtonColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnDodaj = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.tbNaziv = new System.Windows.Forms.TextBox();
-            this.Zanr = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Uredi = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Ukloni = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvZanrovi)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -58,47 +58,6 @@
             this.dgvZanrovi.Size = new System.Drawing.Size(397, 241);
             this.dgvZanrovi.TabIndex = 0;
             this.dgvZanrovi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvZanrovi_CellContentClick);
-         
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.btnDodaj);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.tbNaziv);
-            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.groupBox1.Location = new System.Drawing.Point(15, 11);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(397, 80);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Pretraga žanrova:";
-            // 
-            // btnDodaj
-            // 
-            this.btnDodaj.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.btnDodaj.Location = new System.Drawing.Point(261, 51);
-            this.btnDodaj.Name = "btnDodaj";
-            this.btnDodaj.Size = new System.Drawing.Size(129, 23);
-            this.btnDodaj.TabIndex = 4;
-            this.btnDodaj.Text = "Dodaj";
-            this.btnDodaj.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 33);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "Naziv:";
-            // 
-            // tbNaziv
-            // 
-            this.tbNaziv.Location = new System.Drawing.Point(6, 51);
-            this.tbNaziv.Name = "tbNaziv";
-            this.tbNaziv.Size = new System.Drawing.Size(172, 23);
-            this.tbNaziv.TabIndex = 0;
-            this.tbNaziv.TextChanged += new System.EventHandler(this.tbNaziv_TextChanged);
             // 
             // Zanr
             // 
@@ -131,6 +90,47 @@
             this.Ukloni.Text = "Ukloni";
             this.Ukloni.UseColumnTextForButtonValue = true;
             this.Ukloni.Width = 66;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnDodaj);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.tbNaziv);
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.groupBox1.Location = new System.Drawing.Point(15, 11);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(397, 80);
+            this.groupBox1.TabIndex = 7;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Pretraga žanrova:";
+            // 
+            // btnDodaj
+            // 
+            this.btnDodaj.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnDodaj.Location = new System.Drawing.Point(261, 51);
+            this.btnDodaj.Name = "btnDodaj";
+            this.btnDodaj.Size = new System.Drawing.Size(129, 23);
+            this.btnDodaj.TabIndex = 4;
+            this.btnDodaj.Text = "Dodaj";
+            this.btnDodaj.UseVisualStyleBackColor = true;
+            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 33);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(39, 15);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Naziv:";
+            // 
+            // tbNaziv
+            // 
+            this.tbNaziv.Location = new System.Drawing.Point(6, 51);
+            this.tbNaziv.Name = "tbNaziv";
+            this.tbNaziv.Size = new System.Drawing.Size(172, 23);
+            this.tbNaziv.TabIndex = 0;
+            this.tbNaziv.TextChanged += new System.EventHandler(this.tbNaziv_TextChanged);
             // 
             // frmZanrovi
             // 

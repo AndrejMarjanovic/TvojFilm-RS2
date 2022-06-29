@@ -18,8 +18,6 @@ namespace TvojFilm.Services.Database
         public string Telefon { get; set; } = null!;
         public DateTime DatumRodjenja { get; set; }
 
-        public byte[]? Slika { get; set; }
-
         [ForeignKey(nameof(Grad))]
         public int GradId { get; set; }
         public virtual Gradovi Grad { get; set; } = null!;

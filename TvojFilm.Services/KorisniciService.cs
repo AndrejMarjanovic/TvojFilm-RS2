@@ -110,7 +110,6 @@ namespace TvojFilm.Services
             k.UlogaId = request.UlogaId;
             k.Email = request.Email;
             k.DatumRodjenja = request.DatumRodjenja;
-            k.Slika = request.Slika;
 
             db.SaveChanges();
             return mapper.Map<Model.Korisnici>(k);

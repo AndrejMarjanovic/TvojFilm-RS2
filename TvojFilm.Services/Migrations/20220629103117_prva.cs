@@ -158,7 +158,6 @@ namespace TvojFilm.Services.Migrations
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefon = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DatumRodjenja = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Slika = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     GradId = table.Column<int>(type: "int", nullable: false),
                     UlogaId = table.Column<int>(type: "int", nullable: false),
                     Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -275,8 +274,6 @@ namespace TvojFilm.Services.Migrations
                     PrijedlogIme = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Opis = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DatumPrijedloga = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Odgovoren = table.Column<bool>(type: "bit", nullable: false),
-                    Pregledan = table.Column<bool>(type: "bit", nullable: false),
                     KorisnikId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

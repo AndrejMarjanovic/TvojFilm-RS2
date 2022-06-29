@@ -36,23 +36,6 @@ namespace TvojFilm.WinUI.Forme
 
             if (e.ColumnIndex == 3)
             {
-                var sugestija = await _sugestija.GetById<Model.PrijedloziFilmova>(item.PrijedlogId);
-
-                if (sugestija.Odgovoren == false)
-                {
-                    sugestija.Odgovoren = true;
-                    sugestija.Opis = "Odobrili smo vašu sugestiju filma. Možete ga očekivati na servisu uskoro!";
-                    sugestija.Pregledan = false;
-                    await _sugestija.Update<PrijedloziFilmovaInsertRequest>(item.PrijedlogId, sugestija);
-
-                    MessageBox.Show("Korisnik " + item.Korisnik.Username.ToUpper() + " je obaviješten o odobrenju.");
-
-                    await UcitajPrijedloge();
-                }
-            }
-
-            if (e.ColumnIndex == 4)
-            {
                 DialogResult result = MessageBox.Show("Potvrdite uklanjanje prijedloga: ", "Upozorenje", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {

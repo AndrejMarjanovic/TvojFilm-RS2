@@ -45,7 +45,6 @@
             this.pbSlika = new System.Windows.Forms.PictureBox();
             this.cbRedatelj = new System.Windows.Forms.ComboBox();
             this.cbGlumac = new System.Windows.Forms.ComboBox();
-            this.cbFileDodan = new System.Windows.Forms.CheckBox();
             this.cbZemlja = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tbRadnja = new System.Windows.Forms.RichTextBox();
@@ -53,7 +52,8 @@
             this.err = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnSpremi = new System.Windows.Forms.Button();
             this.ofdSlika = new System.Windows.Forms.OpenFileDialog();
-            this.btnDodajFile = new System.Windows.Forms.Button();
+            this.tbFilmLink = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbSlika)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.SuspendLayout();
@@ -193,17 +193,6 @@
             this.cbGlumac.Size = new System.Drawing.Size(168, 23);
             this.cbGlumac.TabIndex = 48;
             // 
-            // cbFileDodan
-            // 
-            this.cbFileDodan.AutoCheck = false;
-            this.cbFileDodan.AutoSize = true;
-            this.cbFileDodan.Location = new System.Drawing.Point(51, 285);
-            this.cbFileDodan.Name = "cbFileDodan";
-            this.cbFileDodan.Size = new System.Drawing.Size(112, 19);
-            this.cbFileDodan.TabIndex = 49;
-            this.cbFileDodan.Text = "Video file dodan";
-            this.cbFileDodan.UseVisualStyleBackColor = true;
-            // 
             // cbZemlja
             // 
             this.cbZemlja.FormattingEnabled = true;
@@ -256,28 +245,34 @@
             // 
             this.ofdSlika.FileName = "openFileDialog1";
             // 
-            // btnDodajFile
+            // tbFilmLink
             // 
-            this.btnDodajFile.Location = new System.Drawing.Point(51, 319);
-            this.btnDodajFile.Name = "btnDodajFile";
-            this.btnDodajFile.Size = new System.Drawing.Size(112, 23);
-            this.btnDodajFile.TabIndex = 55;
-            this.btnDodajFile.Text = "Dodaj video file";
-            this.btnDodajFile.UseVisualStyleBackColor = true;
-            this.btnDodajFile.Click += new System.EventHandler(this.btnDodajFile_Click);
+            this.tbFilmLink.Location = new System.Drawing.Point(30, 321);
+            this.tbFilmLink.Name = "tbFilmLink";
+            this.tbFilmLink.Size = new System.Drawing.Size(168, 23);
+            this.tbFilmLink.TabIndex = 55;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(30, 288);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(112, 15);
+            this.label10.TabIndex = 56;
+            this.label10.Text = "Film link (YouTube):";
             // 
             // frmDodajFilm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(572, 410);
-            this.Controls.Add(this.btnDodajFile);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.tbFilmLink);
             this.Controls.Add(this.btnSpremi);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.tbRadnja);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbZemlja);
-            this.Controls.Add(this.cbFileDodan);
             this.Controls.Add(this.cbGlumac);
             this.Controls.Add(this.cbRedatelj);
             this.Controls.Add(this.tbOcjena);
@@ -323,7 +318,6 @@
         private PictureBox pbSlika;
         private ComboBox cbRedatelj;
         private ComboBox cbGlumac;
-        private CheckBox cbFileDodan;
         private ComboBox cbZemlja;
         private Label label1;
         private RichTextBox tbRadnja;
@@ -331,6 +325,7 @@
         private ErrorProvider err;
         private Button btnSpremi;
         private OpenFileDialog ofdSlika;
-        private Button btnDodajFile;
+        private Label label10;
+        private TextBox tbFilmLink;
     }
 }

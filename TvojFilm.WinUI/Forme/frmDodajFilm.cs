@@ -29,7 +29,6 @@ namespace TvojFilm.WinUI.Forme
             InitializeComponent();
             _id = id;
             _dgvFilmovi = dgvFilmovi;
-            cbFileDodan.Enabled = false;
         }
 
         private async void frmDodajFilm_Load(object sender, EventArgs e)
@@ -47,7 +46,7 @@ namespace TvojFilm.WinUI.Forme
                 tbOcjena.Text = film.Ocjena.ToString();
                 tbRadnja.Text = film.Opis;
                 dtp.Value = film.Godina;
-                cbFileDodan.Checked = film.FileDodan;
+                tbFilmLink.Text = film.FilmLink;
 
                 if (film.Poster.Length > 0)
                 {
@@ -141,9 +140,8 @@ namespace TvojFilm.WinUI.Forme
                     Ocjena = Double.Parse(tbOcjena.Text),
                     Opis = tbRadnja.Text,
                     Godina = DateTime.Parse(dtp.Value.ToShortDateString()),
-                    FileDodan = cbFileDodan.Checked,
 
-                    FilmFile = videoFile,
+                    FilmLink = tbFilmLink.Text,
                         
                     RedateljId = (cbRedatelj.SelectedItem as Model.Redatelji).RedateljId,
                     GlumacId = (cbGlumac.SelectedItem as Model.Glumci).GlumacId,
@@ -162,8 +160,6 @@ namespace TvojFilm.WinUI.Forme
                 }
                 else
                 {
-                    if (cbFileDodan.Checked == true)
-                        request.FileDodan = true;
 
                     if (pbSlika.Image != null)
                         request.Poster = ImgHelper.FromImageToByte(pbSlika.Image);
@@ -186,7 +182,12 @@ namespace TvojFilm.WinUI.Forme
                 return false;
             }
             else err.Clear();
-
+            if (string.IsNullOrEmpty(tbFilmLink.Text))
+            {
+                err.SetError(tbFilmLink, "Unesite link za film!");
+                return false;
+            }
+            else err.Clear();
             if (string.IsNullOrEmpty(cbZanr.Text))
             {
                 err.SetError(cbZanr, "Odaberite žanr!");
@@ -269,18 +270,6 @@ namespace TvojFilm.WinUI.Forme
             return true;
         }
 
-        private void btnDodajFile_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog opnfd = new OpenFileDialog
-            {
-                Multiselect=false,
-                Filter = "MP4File|*.mp4;MP4"
-            };
-            if (opnfd.ShowDialog() == DialogResult.OK)
-            {
-                videoFile = File.ReadAllBytes(opnfd.FileName);
-            }
-            cbFileDodan.Checked = true;
-        }
+
     }
 }

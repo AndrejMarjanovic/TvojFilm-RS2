@@ -15,8 +15,6 @@ namespace TvojFilm.Services.Database
         public string PrijedlogIme { get; set; } = null!;
         public string Opis { get; set; } = null!;
         public DateTime DatumPrijedloga { get; set; }
-        public bool Odgovoren { get; set; }
-        public bool Pregledan { get; set; }
 
         [ForeignKey(nameof(Korisnik))]
         public int KorisnikId { get; set; }

@@ -21,9 +21,8 @@ namespace TvojFilm.Model.Requests
         [Required(ErrorMessage = "Unesite ocjenu za film.")]
         public double Ocjena { get; set; }
 
-        public byte[] FilmFile { get; set; }
+        public string FilmLink { get; set; }
         public string Opis { get; set; }
-        public bool FileDodan { get; set; }
 
         public int RedateljId { get; set; }
         public int GlumacId { get; set; }

@@ -64,5 +64,11 @@ namespace TvojFilm.WinUI.Forme
             }
 
         }
+
+        private void btnDodaj_Click(object sender, EventArgs e)
+        {
+            frmDodajZanr frm = new frmDodajZanr(dgvZanrovi);
+            frm.Show();
+        }
     }
 }

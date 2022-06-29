@@ -95,7 +95,7 @@ namespace TvojFilm.WinUI.Forme
         {
             var item = dgvFilmovi.SelectedRows[0].DataBoundItem as Model.Filmovi;
 
-            if (e.ColumnIndex == 10)
+            if (e.ColumnIndex == 9)
             {
                 DialogResult result = MessageBox.Show("Potvrdite brisanje odabranog filma:  " + item.NazivFilma + ".", "Upozorenje", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -108,7 +108,7 @@ namespace TvojFilm.WinUI.Forme
                     return;
                 }
             }
-            if (e.ColumnIndex == 9)
+            if (e.ColumnIndex == 8)
             {
                 if (item != null)
                 {

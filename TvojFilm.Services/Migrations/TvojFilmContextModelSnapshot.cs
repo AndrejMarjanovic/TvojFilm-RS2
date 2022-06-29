@@ -53,11 +53,9 @@ namespace TvojFilm.Services.Migrations
                     b.Property<int>("DrzavaId")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("FileDodan")
-                        .HasColumnType("bit");
-
-                    b.Property<byte[]>("FilmFile")
-                        .HasColumnType("varbinary(max)");
+                    b.Property<string>("FilmLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("GlumacId")
                         .HasColumnType("int");
@@ -237,9 +235,6 @@ namespace TvojFilm.Services.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("Slika")
-                        .HasColumnType("varbinary(max)");
-
                     b.Property<string>("Telefon")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -303,15 +298,9 @@ namespace TvojFilm.Services.Migrations
                     b.Property<int>("KorisnikId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Odgovoren")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Opis")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Pregledan")
-                        .HasColumnType("bit");
 
                     b.Property<string>("PrijedlogIme")
                         .IsRequired()

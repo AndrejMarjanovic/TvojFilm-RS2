@@ -14,7 +14,6 @@ namespace TvojFilm.Model.Requests
         public string Telefon { get; set; }
 
         public DateTime DatumRodjenja { get; set; }
-        public byte[] Slika { get; set; }
 
         public int GradId { get; set; }
         public int UlogaId { get; set; }

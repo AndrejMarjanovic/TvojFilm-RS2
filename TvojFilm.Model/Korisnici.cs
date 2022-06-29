@@ -13,8 +13,6 @@ namespace TvojFilm.Model
         public string Telefon { get; set; }
         public DateTime DatumRodjenja { get; set; }
 
-        public byte[] Slika { get; set; }
-
         public int GradId { get; set; }
         public virtual Gradovi Grad { get; set; } 
 
