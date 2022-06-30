@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
+import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
+import 'package:tvojfilmmobile/utils/util.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FilmoviProvider()),
+        ChangeNotifierProvider(create: (_) => KorisniciProvider()),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: true,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          // Define the default brightness and colors.
+          brightness: Brightness.light,
+          primaryColor: Color.fromARGB(255, 21, 84, 136),
+
+          // Define the default `TextTheme`. Use this to specify the default
+          // text styling for headlines, titles, bodies of text, and more.
+          textTheme: const TextTheme(
+            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            headline6: TextStyle(fontSize: 36.0),
+            bodyText2: TextStyle(fontSize: 14.0),
+          ),
+        ),
         home: HomePage(),
         onGenerateRoute: (settings) {
           if (settings.name == FilmoviListScreen.routeName) {
@@ -20,8 +36,14 @@ void main() => runApp(MultiProvider(
     ));
 
 class HomePage extends StatelessWidget {
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordcontroller = TextEditingController();
+  late KorisniciProvider _korisniciProvider;
+
   @override
   Widget build(BuildContext context) {
+    _korisniciProvider = context.read<KorisniciProvider>();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("TvojFilm"),
@@ -50,12 +72,30 @@ class HomePage extends StatelessWidget {
                     child: Container()),
                 Container(
                   child: Center(
-                      child: Text(
-                    "Login",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold),
+                      child: Stack(
+                    children: [
+                      // The text border
+                      Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 3
+                            ..color = Color.fromARGB(255, 34, 67, 94),
+                        ),
+                      ),
+                      // The text inside
+                      const Text(
+                        'Login',
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 235, 235, 235),
+                        ),
+                      ),
+                    ],
                   )),
                 )
               ]),
@@ -72,15 +112,19 @@ class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                         border: Border(bottom: BorderSide(color: Colors.grey))),
                     child: TextField(
+                      controller: _usernameController,
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Email or phone",
+                          hintText: "Username",
                           hintStyle: TextStyle(color: Colors.grey[400])),
                     ),
                   ),
                   Container(
                     padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                        border: Border(bottom: BorderSide(color: Colors.grey))),
                     child: TextField(
+                      controller: _passwordcontroller,
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Pasword",
@@ -99,15 +143,38 @@ class HomePage extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(colors: [
-                  Color.fromRGBO(143, 148, 251, 1),
-                  Color.fromRGBO(143, 148, 251, .6)
+                  Color.fromARGB(255, 21, 84, 136),
+                  Color.fromARGB(255, 35, 57, 75)
                 ]),
               ),
               child: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, FilmoviListScreen.routeName);
+                onTap: () async {
+                  try {
+                    Authorization.username = _usernameController.text;
+                    Authorization.password = _passwordcontroller.text;
+
+                    await _korisniciProvider.get();
+
+                    Navigator.pushNamed(context, FilmoviListScreen.routeName);
+                  } catch (e) {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                              title: Text("Error"),
+                              content: Text(e.toString()),
+                              actions: [
+                                TextButton(
+                                  child: Text("Ok"),
+                                  onPressed: () => Navigator.pop(context),
+                                )
+                              ],
+                            ));
+                  }
                 },
-                child: Center(child: Text("Login")),
+                child: Center(
+                    child: Text("Login",
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 221, 220, 226)))),
               ),
             ),
             SizedBox(
