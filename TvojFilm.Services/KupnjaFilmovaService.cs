@@ -31,5 +31,13 @@ namespace TvojFilm.Services
             var list = query.ToList();
             return _mapper.Map<List<Model.KupnjaFilmova>>(list);
         }
+
+        public override void BeforeInsert(KupnjaFilmovaInsertRequest insert, KupnjaFilmova entity)
+        {
+            //entity.KorisnikId
+            entity.DatumKupovine = DateTime.Now;
+            base.BeforeInsert(insert, entity);
+        }
+
     }
 }

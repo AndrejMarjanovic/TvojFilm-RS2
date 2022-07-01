@@ -6,6 +6,10 @@ import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:provider/provider.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
+import 'package:tvojfilmmobile/widgets/master_screen.dart';
+
+import '../../widgets/tvojfilm_drawer.dart';
+import 'film_detail_screen.dart';
 
 class FilmoviListScreen extends StatefulWidget {
   static const String routeName = "/Filmovi";
@@ -39,32 +43,29 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
   @override
   Widget build(BuildContext context) {
     print("called build $data");
-    return Scaffold(
-      body: SafeArea(
+    return MasterScreenWidget(
         child: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: [
-                _buildHeader(),
-                _buildFilmoviSearch(),
-                Container(
-                  height: 500,
-                  child: GridView(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 3 / 3,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 30),
-                    scrollDirection: Axis.vertical,
-                    children: _buildFilmCardList(),
-                  ),
-                )
-              ],
-            ),
-          ),
+      child: Container(
+        child: Column(
+          children: [
+            _buildHeader(),
+            _buildFilmoviSearch(),
+            Container(
+              height: 500,
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 3 / 3,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 30),
+                scrollDirection: Axis.vertical,
+                children: _buildFilmCardList(),
+              ),
+            )
+          ],
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildHeader() {
@@ -125,9 +126,15 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
         .map((x) => Container(
               child: Column(
                 children: [
-                  Container(
-                    height: 150,
-                    child: imageFromBase64String(x.poster!),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context,
+                          "${FilmDetailsScreen.routeName}/${x.filmId}");
+                    },
+                    child: Container(
+                      height: 150,
+                      child: imageFromBase64String(x.poster!),
+                    ),
                   ),
                   Text(x.nazivFilma ?? ""),
                   Text(formatNumber(x.cijena) + ("  KM")),

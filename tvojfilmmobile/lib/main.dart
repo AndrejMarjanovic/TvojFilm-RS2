@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
+import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 
@@ -30,6 +31,14 @@ void main() => runApp(MultiProvider(
           if (settings.name == FilmoviListScreen.routeName) {
             return MaterialPageRoute(
                 builder: ((context) => FilmoviListScreen()));
+          }
+
+          var uri = Uri.parse(settings.name!);
+          if (uri.pathSegments.length == 2 &&
+              "/${uri.pathSegments.first}" == FilmDetailsScreen.routeName) {
+            var id = uri.pathSegments[1];
+            return MaterialPageRoute(
+                builder: (context) => FilmDetailsScreen(id));
           }
         },
       ),

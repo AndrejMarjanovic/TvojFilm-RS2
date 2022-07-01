@@ -17,6 +17,9 @@ namespace TvojFilm.Services
         {
             var entity = _mapper.Map<TDb>(request);
             _db.Set<TDb>().Add(entity);
+
+            BeforeInsert(request, entity);
+
             _db.SaveChanges();
 
             return _mapper.Map<TModel>(entity);
@@ -43,5 +46,10 @@ namespace TvojFilm.Services
             _db.SaveChanges();
 
         }
+        public virtual void BeforeInsert(TInsert insert, TDb entity)
+        {
+
+        }
     }
+
 }
