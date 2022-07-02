@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using TvojFilm.Model.Requests;
 using TvojFilm.Services.Database;
+using Microsoft.VisualStudio.Services.Users;
 
 namespace TvojFilm.Services
 {
@@ -139,6 +140,7 @@ namespace TvojFilm.Services
             }
             return null;
         }
+
     }
 
 }

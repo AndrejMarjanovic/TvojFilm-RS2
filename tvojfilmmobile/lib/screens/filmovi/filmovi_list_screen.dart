@@ -3,16 +3,20 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:tvojfilmmobile/model/film.dart';
+import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:provider/provider.dart';
+import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 import 'package:tvojfilmmobile/widgets/master_screen.dart';
+import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 
+import '../../model/Korisnici.dart';
 import '../../widgets/tvojfilm_drawer.dart';
 import 'film_detail_screen.dart';
 
 class FilmoviListScreen extends StatefulWidget {
-  static const String routeName = "/Filmovi";
+  // static const String routeName = "/Filmovi";
   const FilmoviListScreen({Key? key}) : super(key: key);
 
   @override
@@ -21,14 +25,16 @@ class FilmoviListScreen extends StatefulWidget {
 
 class _FilmoviListScreenState extends State<FilmoviListScreen> {
   FilmoviProvider? _filmoviProvider = null;
+  KorisniciProvider? _korisniciProvider = null;
   List<Film> data = [];
+  List<Korisnici> dataUser = [];
   TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _filmoviProvider = context.read<FilmoviProvider>();
-
+    _korisniciProvider = context.read<KorisniciProvider>();
     print("called init state");
     loadData();
   }
@@ -37,6 +43,11 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
     var tempData = await _filmoviProvider?.get(null);
     setState(() {
       data = tempData!;
+    });
+    var user = await _korisniciProvider?.get(null);
+    setState(() {
+      dataUser = user!;
+      // dataUser.map((x) => BaseProvider.korisnikID = x.korisnikId);
     });
   }
 
@@ -128,8 +139,11 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
                 children: [
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context,
-                          "${FilmDetailsScreen.routeName}/${x.filmId}");
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  FilmDetailsScreen(film: x)));
                     },
                     child: Container(
                       height: 150,
@@ -143,7 +157,6 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
             ))
         .cast<Widget>()
         .toList();
-
     return list;
   }
 }

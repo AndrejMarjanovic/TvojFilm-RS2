@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 using TvojFilm.Model;
 using TvojFilm.Model.Requests;
 using TvojFilm.Services;
@@ -47,7 +48,5 @@ namespace TvojFilm.Controllers
         {
             return _service.GetbyId(id);
         }
-
-
     }
 }

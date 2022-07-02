@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tvojfilmmobile/model/Korisnici.dart';
+import 'package:tvojfilmmobile/model/film.dart';
+import 'package:tvojfilmmobile/model/korisnik.dart';
+import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
@@ -27,19 +31,10 @@ void main() => runApp(MultiProvider(
           ),
         ),
         home: HomePage(),
-        onGenerateRoute: (settings) {
-          if (settings.name == FilmoviListScreen.routeName) {
-            return MaterialPageRoute(
-                builder: ((context) => FilmoviListScreen()));
-          }
-
-          var uri = Uri.parse(settings.name!);
-          if (uri.pathSegments.length == 2 &&
-              "/${uri.pathSegments.first}" == FilmDetailsScreen.routeName) {
-            var id = uri.pathSegments[1];
-            return MaterialPageRoute(
-                builder: (context) => FilmDetailsScreen(id));
-          }
+        initialRoute: '/',
+        routes: {
+          '/Films': (context) => FilmoviListScreen(),
+          '/Details': (context) => FilmDetailsScreen(),
         },
       ),
     ));
@@ -52,7 +47,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _korisniciProvider = context.read<KorisniciProvider>();
-
     return Scaffold(
       appBar: AppBar(
         title: Text("TvojFilm"),
@@ -161,10 +155,11 @@ class HomePage extends StatelessWidget {
                   try {
                     Authorization.username = _usernameController.text;
                     Authorization.password = _passwordcontroller.text;
+                    BaseProvider.username = _usernameController.text;
 
-                    await _korisniciProvider.get();
+                    await _korisniciProvider.login();
 
-                    Navigator.pushNamed(context, FilmoviListScreen.routeName);
+                    Navigator.of(context).pushReplacementNamed('/Films');
                   } catch (e) {
                     showDialog(
                         context: context,

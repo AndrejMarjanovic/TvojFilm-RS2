@@ -9,6 +9,8 @@ class Film {
   String? poster;
   num? cijena;
   num? ocjena;
+  String? filmLink;
+  String? opis;
 
   Film() {}
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
+import 'package:tvojfilmmobile/model/Korisnici.dart';
 import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 import 'package:http/http.dart';
@@ -10,7 +11,9 @@ import 'package:flutter/foundation.dart';
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
   String? _endpoint;
-
+  static String? username;
+  static String? password;
+  static int? korisnikID;
   HttpClient client = new HttpClient();
   IOClient? http;
 
@@ -28,7 +31,30 @@ abstract class BaseProvider<T> with ChangeNotifier {
     http = IOClient(client);
   }
 
-  Future<List<T>> getById(int id, [dynamic additionalData]) async {
+  Future<List<T>> login() async {
+    var url = "$_baseUrl$_endpoint";
+
+    var uri = Uri.parse(url);
+
+    Map<String, String> headers = createHeaders();
+    print("get me");
+    var response = await http!.get(uri, headers: headers);
+    print("done $response");
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      var lista = json.decode(response.body) as List;
+      for (var item in lista) {
+        if (item["username"] == username) {
+          korisnikID = item["korisnikId"];
+        }
+      }
+      return data.map((x) => fromJson(x)).cast<T>().toList();
+    } else {
+      throw Exception("Exception... handle this gracefully");
+    }
+  }
+
+  Future<dynamic> getById(int id, [dynamic additionalData]) async {
     var url = Uri.parse("$_baseUrl$_endpoint/$id");
 
     Map<String, String> headers = createHeaders();
@@ -98,7 +124,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  Map<String, String> createHeaders() {
+  static Map<String, String> createHeaders() {
     String? username = Authorization.username;
     String? password = Authorization.password;
 
@@ -116,7 +142,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     throw Exception("Override method");
   }
 
-  String getQueryString(Map params,
+  static String getQueryString(Map params,
       {String prefix: '&', bool inRecursion: false}) {
     String query = '';
     params.forEach((key, value) {
@@ -148,7 +174,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     return query;
   }
 
-  bool isValidResponseCode(Response response) {
+  static bool isValidResponseCode(Response response) {
     if (response.statusCode == 200) {
       if (response.body != "") {
         return true;
@@ -160,7 +186,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     } else if (response.statusCode == 400) {
       throw Exception("Bad request");
     } else if (response.statusCode == 401) {
-      throw Exception("Unauthorized");
+      throw Exception("Nemate pravo pristupa");
     } else if (response.statusCode == 403) {
       throw Exception("Forbidden");
     } else if (response.statusCode == 404) {

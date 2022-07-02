@@ -1,5 +1,4 @@
 import 'package:tvojfilmmobile/model/film.dart';
-//import 'package:tvojfilmmobile/providers/cart_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -21,7 +20,7 @@ class tvojFilmDrawer extends StatelessWidget {
           ListTile(
             title: Text('Home'),
             onTap: () {
-              Navigator.popAndPushNamed(context, FilmoviListScreen.routeName);
+              //  Navigator.popAndPushNamed(context, FilmoviListScreen.routeName);
             },
           ),
           ListTile(

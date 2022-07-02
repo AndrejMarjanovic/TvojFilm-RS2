@@ -11,6 +11,8 @@ Film _$FilmFromJson(Map<String, dynamic> json) => Film()
   ..nazivFilma = json['nazivFilma'] as String?
   ..cijena = json['cijena'] as num?
   ..ocjena = json['ocjena'] as num?
+  ..opis = json['opis'] as String?
+  ..filmLink = json['filmLink'] as String?
   ..poster = json['poster'] as String?;
 
 Map<String, dynamic> _$FilmToJson(Film instance) => <String, dynamic>{
@@ -19,4 +21,6 @@ Map<String, dynamic> _$FilmToJson(Film instance) => <String, dynamic>{
       'poster': instance.poster,
       'cijena': instance.cijena,
       'ocjena': instance.ocjena,
+      'filmLink': instance.filmLink,
+      'opis': instance.opis
     };

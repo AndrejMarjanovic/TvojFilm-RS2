@@ -1,23 +1,32 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'dart:ui';
+import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:tvojfilmmobile/model/film.dart';
+import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/widgets/master_screen.dart';
 
-class FilmDetailsScreen extends StatefulWidget {
-  static const String routeName = "/Filmovi";
-  String id;
-  FilmDetailsScreen(this.id, {Key? key}) : super(key: key);
+import '../../utils/util.dart';
+import '../../widgets/tvojfilm_drawer.dart';
+import 'filmovi_list_screen.dart';
 
-  @override
-  State<FilmDetailsScreen> createState() => _FilmDetailsScreenState();
-}
+class FilmDetailsScreen extends StatelessWidget {
+  FilmDetailsScreen({Key? key, this.film}) : super(key: key);
+  final Film? film;
 
-class _FilmDetailsScreenState extends State<FilmDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return MasterScreenWidget(
-      child: Center(
-        child: Text(this.widget.id.toString()),
+      child: Column(
+        children: [
+          imageFromBase64String(film!.poster!),
+          Text(film!.nazivFilma!),
+          Text(film!.opis!),
+          Text(film!.ocjena!.toString()),
+          Text(film!.cijena!.toString()),
+          Text('Link ' + film!.filmLink!),
+          Text(BaseProvider.korisnikID.toString()),
+        ],
       ),
     );
   }
