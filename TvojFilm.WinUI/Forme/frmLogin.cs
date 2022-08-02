@@ -30,21 +30,26 @@ namespace TvojFilm.WinUI.Forme
                 try
                 {
 
-                    List<Model.Korisnici> listKorisnici = await _korisnici.Get<List<Model.Korisnici>>(new KorisnikSearchRequest() { Username = APIService.Username });
+                    List<Model.Korisnici> listKorisnici = await _korisnici.Get<List<Model.Korisnici>>(new KorisnikSearchRequest() { Username = APIService.Username }) ;
                     APIService.LogiraniKorisnik = listKorisnici.Where(x => x.Username == APIService.Username).FirstOrDefault();
-
-                    if (APIService.LogiraniKorisnik.Uloga.Naziv == "Administrator")
+                    if (APIService.LogiraniKorisnik!=null)
                     {
-                        await _korisnici.Get<dynamic>(null);
+                        if (APIService.LogiraniKorisnik.Uloga.Naziv == "Administrator")
+                        {
+                            await _korisnici.Get<dynamic>(null);
 
-                        mdiMain frm = new mdiMain();
-                        DialogResult = DialogResult.OK;
-                        frm.Show();
-                        this.Hide();
-                    }
-                    else
+                            mdiMain frm = new mdiMain();
+                            DialogResult = DialogResult.OK;
+                            frm.Show();
+                            this.Hide();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Nemate Pravo Pristupa!", "Greska!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    } else
                     {
-                        MessageBox.Show("Nemate Pravo Pristupa!", "Greska!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Niste autentificirani!", "Greska!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 catch (Exception ex)

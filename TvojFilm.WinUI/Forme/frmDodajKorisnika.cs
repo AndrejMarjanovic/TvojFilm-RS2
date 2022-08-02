@@ -35,7 +35,7 @@ namespace TvojFilm.WinUI.Forme
         private async void frmDodajKorisnika_Load(object sender, EventArgs e)
         {
             await UcitajPodatke();
-            if (_id.HasValue)
+            if (_id.HasValue && _id == APIService.LogiraniKorisnik!.KorisnikId)
             {
                 var korisnici = await _korisnici.GetById<Model.Korisnici>(_id);
                 tbIme.Text = korisnici.Ime;
@@ -44,11 +44,6 @@ namespace TvojFilm.WinUI.Forme
                 tbEmail.Text = korisnici.Email;
                 tbBroj.Text = korisnici.Telefon;
                 dtp.Value = korisnici.DatumRodjenja;
-
-                tbPass.Hide();
-                tbPotvrda.Hide();
-                label9.Hide();
-                label10.Hide();
 
                 foreach (Model.Gradovi item in cbGrad.Items)
                 {
@@ -60,7 +55,39 @@ namespace TvojFilm.WinUI.Forme
                     if (item.UlogaId == korisnici.UlogaId)
                         cbUloga.SelectedItem = item;
                 }
+            }
+            else if (_id.HasValue && _id != APIService.LogiraniKorisnik!.KorisnikId)
+            {
+                var korisnici = await _korisnici.GetById<Model.Korisnici>(_id);
+                tbIme.Text = korisnici.Ime;
+                tbIme.Enabled = false;
+                tbPrezime.Text = korisnici.Prezime;
+                tbPrezime.Enabled = false;
+                tbUsername.Text = korisnici.Username;
+                tbUsername.Enabled = false;
+                tbEmail.Text = korisnici.Email;
+                tbEmail.Enabled = false;
+                tbBroj.Text = korisnici.Telefon;
+                tbBroj.Enabled = false;
+                dtp.Value = korisnici.DatumRodjenja;
+                dtp.Enabled = false;
 
+                tbPass.Hide();
+                tbPotvrda.Hide();
+                label9.Hide();
+                label10.Hide();
+
+                foreach (Model.Gradovi item in cbGrad.Items)
+                {
+                    if (item.GradId == korisnici.GradId)
+                        cbGrad.SelectedItem = item;
+                        cbGrad.Enabled = false;
+                }
+                foreach (Model.Uloge item in cbUloga.Items)
+                {
+                    if (item.UlogaId == korisnici.UlogaId)
+                        cbUloga.SelectedItem = item;
+                }
             }
         }
 
@@ -101,11 +128,30 @@ namespace TvojFilm.WinUI.Forme
                     UlogaId = (cbUloga.SelectedItem as Model.Uloge).UlogaId
 
                 };
+                var korisnici = await _korisnici.Get<List<Model.Korisnici>>(null);
 
-                MessageBox.Show("Korisnik dodan!");
-                this.Close();
-                if (_dgvKorisnici != null)
-                    _dgvKorisnici.DataSource = await _korisnici.Get<List<Model.Korisnici>>(null);
+                if (_id.HasValue)
+                {
+                    await _korisnici.Update<Model.Korisnici>(_id, request);
+                }
+                else
+                {
+                    await _korisnici.Insert<Model.Korisnici>(request);
+                }
+                if (_id.HasValue)
+                {
+                    MessageBox.Show("Uspješno ste izvršili promjene!");
+                    this.Close();
+                    if (_dgvKorisnici != null)
+                        _dgvKorisnici.DataSource = await _korisnici.Get<List<Model.Korisnici>>(null);
+                }
+                else
+                {
+                    MessageBox.Show("Dodan novi korisnik!");
+                    this.Close();
+                    if (_dgvKorisnici != null)
+                        _dgvKorisnici.DataSource = await _korisnici.Get<List<Model.Korisnici>>(null);
+                }
 
             }
         }
@@ -195,7 +241,7 @@ namespace TvojFilm.WinUI.Forme
             }
             if (string.IsNullOrWhiteSpace(tbPass.Text))
             {
-                if (_id.HasValue)
+                if (_id.HasValue && _id!=APIService.LogiraniKorisnik!.GradId)
                 {
                     err.SetError(tbPass, null);
                     err.SetError(tbPotvrda, null);
