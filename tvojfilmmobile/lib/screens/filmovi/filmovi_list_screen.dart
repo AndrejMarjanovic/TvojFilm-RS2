@@ -27,7 +27,6 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
   FilmoviProvider? _filmoviProvider = null;
   KorisniciProvider? _korisniciProvider = null;
   List<Film> data = [];
-  List<Korisnici> dataUser = [];
   TextEditingController _searchController = TextEditingController();
 
   @override
@@ -44,52 +43,56 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
     setState(() {
       data = tempData!;
     });
-    var user = await _korisniciProvider?.get(null);
-    setState(() {
-      dataUser = user!;
-      // dataUser.map((x) => BaseProvider.korisnikID = x.korisnikId);
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     print("called build $data");
-    return MasterScreenWidget(
-        child: SingleChildScrollView(
-      child: Container(
-        child: Column(
-          children: [
-            _buildHeader(),
-            _buildFilmoviSearch(),
-            Container(
-              height: 500,
-              child: GridView(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 3 / 3,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 30),
-                scrollDirection: Axis.vertical,
-                children: _buildFilmCardList(),
-              ),
-            )
-          ],
+    return Scaffold(
+        backgroundColor: Colors.grey[100],
+        appBar: AppBar(
+          iconTheme:
+              const IconThemeData(color: Color.fromARGB(255, 235, 235, 235)),
+          title: Text("Dostupni filmovi",
+              style:
+                  const TextStyle(color: Color.fromARGB(255, 235, 235, 235))),
+          backgroundColor: Color.fromARGB(255, 21, 84, 136),
+          centerTitle: true,
+          elevation: 0.0,
         ),
-      ),
-    ));
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Text(
-        "Dostupni filmovi",
-        style: TextStyle(
-            color: Color.fromARGB(255, 21, 84, 136),
-            fontSize: 30,
-            fontWeight: FontWeight.bold),
-      ),
-    );
+        drawer: tvojFilmDrawer(),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(left: 8, right: 8),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  _buildFilmoviSearch(),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Container(
+                    height: MediaQuery.of(context).size.height -
+                        MediaQuery.of(context).size.height / 3,
+                    //height: 550,
+                    child: GridView(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: 3 / 3,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10),
+                      scrollDirection: Axis.vertical,
+                      children: _buildFilmCardList(),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ));
   }
 
   Widget _buildFilmoviSearch() {
@@ -150,7 +153,15 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
                       child: imageFromBase64String(x.poster!),
                     ),
                   ),
-                  Text(x.nazivFilma ?? ""),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    x.nazivFilma ?? "",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 34, 67, 94)),
+                  ),
                   Text(formatNumber(x.cijena) + ("  KM")),
                 ],
               ),

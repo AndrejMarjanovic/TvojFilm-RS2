@@ -1,4 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:tvojfilmmobile/model/redatelj.dart';
+
+import 'glumac.dart';
+import 'zanr.dart';
 
 part 'film.g.dart';
 
@@ -7,10 +11,14 @@ class Film {
   int? filmId;
   String? nazivFilma;
   String? poster;
-  num? cijena;
-  num? ocjena;
+  double? cijena;
+  double? ocjena;
   String? filmLink;
   String? opis;
+  Redatelj? redatelj;
+  Glumac? glumac;
+  Zanr? zanr;
+  DateTime? godina;
 
   Film() {}
 

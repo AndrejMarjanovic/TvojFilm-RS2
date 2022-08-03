@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
-import 'package:tvojfilmmobile/model/Korisnici.dart';
-import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
@@ -11,8 +9,6 @@ import 'package:flutter/foundation.dart';
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
   String? _endpoint;
-  static String? username;
-  static String? password;
   static int? korisnikID;
   HttpClient client = new HttpClient();
   IOClient? http;
@@ -44,7 +40,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
       var data = jsonDecode(response.body);
       var lista = json.decode(response.body) as List;
       for (var item in lista) {
-        if (item["username"] == username) {
+        if (item["username"] == Authorization.username) {
           korisnikID = item["korisnikId"];
         }
       }
@@ -54,7 +50,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  Future<dynamic> getById(int id, [dynamic additionalData]) async {
+  Future<T> getById(int id, [dynamic additionalData]) async {
     var url = Uri.parse("$_baseUrl$_endpoint/$id");
 
     Map<String, String> headers = createHeaders();
@@ -63,9 +59,9 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return data.map((x) => fromJson(x)).cast<T>().toList();
+      return fromJson(data);
     } else {
-      throw Exception("Exception... handle this gracefully");
+      throw Exception("An error occured!");
     }
   }
 
@@ -101,7 +97,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return fromJson(data) as T;
+      return fromJson(data);
     } else {
       return null;
     }

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tvojfilmmobile/model/Korisnici.dart';
 import 'package:tvojfilmmobile/model/film.dart';
-import 'package:tvojfilmmobile/model/korisnik.dart';
+import 'package:tvojfilmmobile/model/kupnja.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
+import 'package:tvojfilmmobile/provider/glumci_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
+import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
@@ -14,6 +16,8 @@ void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FilmoviProvider()),
         ChangeNotifierProvider(create: (_) => KorisniciProvider()),
+        ChangeNotifierProvider(create: (_) => GlumciProvider()),
+        ChangeNotifierProvider(create: (_) => KupnjaInsertProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -50,6 +54,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text("TvojFilm"),
+        backgroundColor: Color.fromARGB(255, 21, 84, 136),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -155,7 +160,6 @@ class HomePage extends StatelessWidget {
                   try {
                     Authorization.username = _usernameController.text;
                     Authorization.password = _passwordcontroller.text;
-                    BaseProvider.username = _usernameController.text;
 
                     await _korisniciProvider.login();
 
