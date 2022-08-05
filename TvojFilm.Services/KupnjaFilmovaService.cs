@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace TvojFilm.Services
         }
         public override List<Model.KupnjaFilmova> Get(KupnjaFilmovaSearchRequest search)
         {
-            var query = _db.KupnjaFilmova.AsQueryable();
+            var query = _db.KupnjaFilmova.Include(x => x.Film).Include(x=>x.Film.Redatelj).Include(x => x.Film.Glumac).Include(x => x.Film.Zanr).Include(x => x.Korisnik).AsQueryable();
 
 
             if (search?.FilmId.HasValue == true)

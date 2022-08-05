@@ -8,8 +8,10 @@ import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:tvojfilmmobile/provider/glumci_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
+import 'package:tvojfilmmobile/provider/kupnja_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
+import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 
 void main() => runApp(MultiProvider(
@@ -17,7 +19,8 @@ void main() => runApp(MultiProvider(
         ChangeNotifierProvider(create: (_) => FilmoviProvider()),
         ChangeNotifierProvider(create: (_) => KorisniciProvider()),
         ChangeNotifierProvider(create: (_) => GlumciProvider()),
-        ChangeNotifierProvider(create: (_) => KupnjaInsertProvider())
+        ChangeNotifierProvider(create: (_) => KupnjaInsertProvider()),
+        ChangeNotifierProvider(create: (_) => KupnjaProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -39,6 +42,8 @@ void main() => runApp(MultiProvider(
         routes: {
           '/Films': (context) => FilmoviListScreen(),
           '/Details': (context) => FilmDetailsScreen(),
+          '/Videoteka': (context) => VideotekaScreen(),
+          '/LogOut': (context) => HomePage(),
         },
       ),
     ));
@@ -161,8 +166,8 @@ class HomePage extends StatelessWidget {
                     Authorization.username = _usernameController.text;
                     Authorization.password = _passwordcontroller.text;
 
-                    await _korisniciProvider.login();
-
+                    await _korisniciProvider
+                        .login({'username': Authorization.username});
                     Navigator.of(context).pushReplacementNamed('/Films');
                   } catch (e) {
                     showDialog(

@@ -3,39 +3,40 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:intl/intl.dart';
 import 'package:tvojfilmmobile/model/film.dart';
+import 'package:tvojfilmmobile/model/kupnja.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:provider/provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
-import 'package:tvojfilmmobile/widgets/master_screen.dart';
+import '../../provider/kupnja_provider.dart';
 import '../../widgets/tvojfilm_drawer.dart';
 import 'film_detail_screen.dart';
+import 'gledaj_film_screen.dart';
 
-class FilmoviListScreen extends StatefulWidget {
-  const FilmoviListScreen({Key? key}) : super(key: key);
+class VideotekaScreen extends StatefulWidget {
+  const VideotekaScreen({Key? key}) : super(key: key);
 
   @override
-  State<FilmoviListScreen> createState() => _FilmoviListScreenState();
+  State<VideotekaScreen> createState() => _VideotekaScreenState();
 }
 
-class _FilmoviListScreenState extends State<FilmoviListScreen> {
-  FilmoviProvider? _filmoviProvider = null;
-  KorisniciProvider? _korisniciProvider = null;
-  List<Film> data = [];
+class _VideotekaScreenState extends State<VideotekaScreen> {
+  KupnjaProvider? _kupnjaProvider = null;
+
+  List<KupnjaFilma> data = [];
   TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    _filmoviProvider = context.read<FilmoviProvider>();
-    _korisniciProvider = context.read<KorisniciProvider>();
-    print("called init state");
+    _kupnjaProvider = context.read<KupnjaProvider>();
     loadData();
   }
 
   Future loadData() async {
-    var tempData = await _filmoviProvider?.get(null);
+    var tempData =
+        await _kupnjaProvider?.get({'korisnikId': BaseProvider.korisnikID});
     setState(() {
       data = tempData!;
     });
@@ -43,13 +44,12 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("called build $data");
     return Scaffold(
         backgroundColor: Colors.grey[100],
         appBar: AppBar(
           iconTheme:
               const IconThemeData(color: Color.fromARGB(255, 235, 235, 235)),
-          title: Text("Dostupni filmovi",
+          title: Text("Moji filmovi",
               style:
                   const TextStyle(color: Color.fromARGB(255, 235, 235, 235))),
           backgroundColor: Color.fromARGB(255, 21, 84, 136),
@@ -66,13 +66,12 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
                   const SizedBox(
                     height: 6,
                   ),
-                  _buildFilmoviSearch(),
                   const SizedBox(
                     height: 6,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height -
-                        MediaQuery.of(context).size.height / 3.5,
+                        MediaQuery.of(context).size.height / 3,
                     //height: 550,
                     child: GridView(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -91,42 +90,6 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
         ));
   }
 
-  Widget _buildFilmoviSearch() {
-    return Row(
-      children: [
-        Expanded(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: TextField(
-              controller: _searchController,
-              onSubmitted: (value) async {
-                var tempData =
-                    await _filmoviProvider?.get({'nazivFilma': value});
-                setState(() {
-                  data = tempData!;
-                });
-              },
-              onChanged: (value) async {
-                var tempData =
-                    await _filmoviProvider?.get({'nazivFilma': value});
-                setState(() {
-                  data = tempData!;
-                });
-              },
-              decoration: InputDecoration(
-                  hintText: "Search",
-                  prefixIcon: Icon(Icons.search),
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide:
-                          BorderSide(color: Color.fromARGB(255, 21, 84, 136)))),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
   List<Widget> _buildFilmCardList() {
     if (data.length == 0) {
       return [Text("Loading....")];
@@ -142,23 +105,28 @@ class _FilmoviListScreenState extends State<FilmoviListScreen> {
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  FilmDetailsScreen(film: x)));
+                                  GledajFilmScreen(film: x.film!)));
                     },
                     child: Container(
                       height: 150,
-                      child: imageFromBase64String(x.poster!),
+                      child: imageFromBase64String(x.film!.poster!),
                     ),
                   ),
                   const SizedBox(
                     height: 3,
                   ),
                   Text(
-                    x.nazivFilma ?? "",
+                    x.film!.nazivFilma ?? "",
                     style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 34, 67, 94)),
                   ),
-                  Text(formatNumber(x.cijena) + ("  KM")),
+                  Text(
+                    "GLEDAJ",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 41, 125, 194)),
+                  ),
                 ],
               ),
             ))

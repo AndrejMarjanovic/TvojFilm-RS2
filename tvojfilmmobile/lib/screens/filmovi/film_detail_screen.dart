@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:analyzer/file_system/overlay_file_system.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,14 +7,12 @@ import 'dart:convert';
 import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
-import 'package:tvojfilmmobile/provider/glumci_provider.dart';
 import 'package:tvojfilmmobile/screens/placanje/kupnja_filma.dart';
 import 'package:tvojfilmmobile/widgets/master_screen.dart';
-
-import '../../model/glumac.dart';
+import '../../model/kupnja.dart';
+import '../../provider/kupnja_provider.dart';
 import '../../utils/util.dart';
-import '../../widgets/tvojfilm_drawer.dart';
-import 'filmovi_list_screen.dart';
+import 'gledaj_film_screen.dart';
 
 class FilmDetailsScreen extends StatefulWidget {
   const FilmDetailsScreen({Key? key, this.film}) : super(key: key);
@@ -27,6 +24,8 @@ class FilmDetailsScreen extends StatefulWidget {
 class _FilmDetailsScreenState extends State<FilmDetailsScreen> {
   FilmoviProvider? _filmProvider = null;
   final Film? film;
+  List<KupnjaFilma> data = [];
+  KupnjaProvider? _kupnjaProvider = null;
 
   var formatter = NumberFormat('###.0#');
   var godina = DateFormat('yyyy');
@@ -36,8 +35,17 @@ class _FilmDetailsScreenState extends State<FilmDetailsScreen> {
   @override
   void initState() {
     _filmProvider = context.read<FilmoviProvider>();
-
+    _kupnjaProvider = context.read<KupnjaProvider>();
+    checkIfBought();
     super.initState();
+  }
+
+  Future checkIfBought() async {
+    var tempData = await _kupnjaProvider
+        ?.get({'korisnikId': BaseProvider.korisnikID, 'filmId': film!.filmId!});
+    setState(() {
+      data = tempData!;
+    });
   }
 
   @override
@@ -60,8 +68,10 @@ class _FilmDetailsScreenState extends State<FilmDetailsScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Center(child: imageFromBase64String(film!.poster!))),
+                padding: const EdgeInsets.only(top: 5),
+                child: Center(child: imageFromBase64String(film!.poster!)),
+                height: 250,
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -73,45 +83,85 @@ class _FilmDetailsScreenState extends State<FilmDetailsScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(width: 15.0),
-                    Expanded(
-                      child: Container(
-                        height: 50,
-                        margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(colors: [
-                            Color.fromARGB(255, 21, 84, 136),
-                            Color.fromARGB(255, 35, 57, 75)
-                          ]),
-                        ),
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        KupnjaFilmaScreen(film: film)));
-                          },
-                          child: Center(
-                              child: Text("Kupi",
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 221, 220, 226),
-                                      fontWeight: FontWeight.bold))),
-                        ),
-                      ),
-                    ),
-                  ]),
+              _buildButton(),
               const SizedBox(
                 height: 16,
               ),
             ],
           )),
         ));
+  }
+
+  Row _buildButton() {
+    if (data.length == 0) {
+      return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(width: 15.0),
+            Expanded(
+              child: Container(
+                height: 50,
+                margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: LinearGradient(colors: [
+                    Color.fromARGB(255, 21, 84, 136),
+                    Color.fromARGB(255, 35, 57, 75)
+                  ]),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                KupnjaFilmaScreen(film: film)));
+                  },
+                  child: Center(
+                      child: Text("Kupi",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 221, 220, 226),
+                              fontWeight: FontWeight.bold))),
+                ),
+              ),
+            ),
+          ]);
+    } else {
+      return Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(width: 15.0),
+            Expanded(
+              child: Container(
+                height: 50,
+                margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  gradient: LinearGradient(colors: [
+                    Color.fromARGB(255, 21, 84, 136),
+                    Color.fromARGB(255, 35, 57, 75)
+                  ]),
+                ),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                GledajFilmScreen(film: film)));
+                  },
+                  child: Center(
+                      child: Text("Već ste kupili ovaj film",
+                          style: TextStyle(
+                              color: Color.fromARGB(255, 221, 220, 226),
+                              fontWeight: FontWeight.bold))),
+                ),
+              ),
+            ),
+          ]);
+    }
   }
 
   Column _buildFilmInformation() {

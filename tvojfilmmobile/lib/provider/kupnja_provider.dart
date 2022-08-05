@@ -16,6 +16,6 @@ class KupnjaProvider extends BaseProvider<KupnjaFilma> {
   @override
   KupnjaFilma fromJson(data) {
     // TODO: implement fromJson
-    return KupnjaFilma();
+    return KupnjaFilma.fromJson(data);
   }
 }

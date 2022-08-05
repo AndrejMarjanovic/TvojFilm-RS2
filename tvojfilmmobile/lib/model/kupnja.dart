@@ -13,7 +13,7 @@ class KupnjaFilma {
 
   factory KupnjaFilma.fromJson(Map<String, dynamic> json) {
     return KupnjaFilma(
-      kupnjaId: json["kupnjaId"],
+      kupnjaId: json["kupnjaId"] as int,
       korisnik: Korisnici.fromJson(json['korisnik']),
       film: Film.fromJson(json['film']),
       datumKupovine: DateTime.tryParse(json['datumKupovine']),

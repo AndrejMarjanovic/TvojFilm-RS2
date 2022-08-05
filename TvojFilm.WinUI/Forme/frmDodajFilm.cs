@@ -188,6 +188,12 @@ namespace TvojFilm.WinUI.Forme
                 return false;
             }
             else err.Clear();
+            if (!(tbFilmLink.Text.Contains("https://www.youtube.com/watch?")))
+            {
+                err.SetError(tbFilmLink, "Unesite validan Youtube link! (https://www.youtube.com/watch?...)");
+                return false;
+            }
+            else err.Clear();
             if (string.IsNullOrEmpty(cbZanr.Text))
             {
                 err.SetError(cbZanr, "Odaberite žanr!");
@@ -242,7 +248,7 @@ namespace TvojFilm.WinUI.Forme
             }
             else
             {
-                err.SetError(tbOcjena, "Polje ocjenaprihvaća samo brojeve!");
+                err.SetError(tbOcjena, "Polje ocjena prihvaća samo brojeve!");
                 return false;
             }
 
@@ -260,12 +266,6 @@ namespace TvojFilm.WinUI.Forme
                 }
 
             }
-            //if (cbFileDodan.Checked == false && FilmFajl == null)
-            //{
-            //    err.SetError(cbFileDodan, "Morate unijeti video fajl filma!");
-
-            //    return false;
-            //}
 
             return true;
         }

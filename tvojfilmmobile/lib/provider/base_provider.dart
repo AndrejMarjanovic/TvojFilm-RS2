@@ -27,8 +27,13 @@ abstract class BaseProvider<T> with ChangeNotifier {
     http = IOClient(client);
   }
 
-  Future<List<T>> login() async {
+  Future<List<T>> login([dynamic search]) async {
     var url = "$_baseUrl$_endpoint";
+
+    if (search != null) {
+      String queryString = getQueryString(search);
+      url = url + "?" + queryString;
+    }
 
     var uri = Uri.parse(url);
 
@@ -42,9 +47,15 @@ abstract class BaseProvider<T> with ChangeNotifier {
       for (var item in lista) {
         if (item["username"] == Authorization.username) {
           korisnikID = item["korisnikId"];
+        } else {
+          korisnikID = null;
         }
       }
-      return data.map((x) => fromJson(x)).cast<T>().toList();
+      if (BaseProvider.korisnikID != null) {
+        return data.map((x) => fromJson(x)).cast<T>().toList();
+      } else {
+        throw Exception("Nemate pravo pristupa");
+      }
     } else {
       throw Exception("Exception... handle this gracefully");
     }
