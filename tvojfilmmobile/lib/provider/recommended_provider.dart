@@ -7,14 +7,12 @@ import 'package:http/http.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/io_client.dart';
 
-import '../model/glumac.dart';
-
-class GlumciProvider extends BaseProvider<Glumac> {
-  GlumciProvider() : super("Glumci");
+class RecommendedProvider extends BaseProvider<Film> {
+  RecommendedProvider() : super("Recommended");
 
   @override
-  Glumac fromJson(data) {
+  Film fromJson(data) {
     // TODO: implement fromJson
-    return Glumac();
+    return Film.fromJson(data);
   }
 }

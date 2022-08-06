@@ -6,6 +6,8 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
+import 'package:tvojfilmmobile/provider/recommended_provider.dart';
+import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/widgets/master_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../utils/util.dart';
@@ -19,11 +21,10 @@ class GledajFilmScreen extends StatefulWidget {
 
 class _GledajFilmScreenState extends State<GledajFilmScreen> {
   final Film? film;
+  RecommendedProvider? _recommendedProvider = null;
+  List<Film> recommended = [];
 
   late YoutubePlayerController controller;
-
-  var formatter = NumberFormat('###.0#');
-  var godina = DateFormat('yyyy');
 
   _GledajFilmScreenState(this.film);
 
@@ -39,9 +40,18 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
     super.dispose();
   }
 
+  Future loadData() async {
+    var Data = await _recommendedProvider?.get({'id': film!.filmId});
+    setState(() {
+      recommended = Data!;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _recommendedProvider = context.read<RecommendedProvider>();
+
     var url = film!.filmLink!;
     var video = YoutubePlayer.convertUrlToId(url);
     if (video != null) {
@@ -55,6 +65,8 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
           initialVideoId: videoAlt!,
           flags: const YoutubePlayerFlags(autoPlay: false));
     }
+
+    loadData();
   }
 
   @override
@@ -76,60 +88,105 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
               elevation: 0.0,
             ),
             body: SafeArea(
-              child: SingleChildScrollView(
+              child: Column(children: [
+                player,
+                const SizedBox(
+                  height: 10,
+                ),
+                SingleChildScrollView(
                   child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  player,
-                  const SizedBox(
-                    height: 10,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: Align(
+                              child: _buildInfo(),
+                              alignment: Alignment.centerLeft)),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      Container(
+                        height: 180,
+                        child: GridView(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 1,
+                                  childAspectRatio: 4 / 3,
+                                  crossAxisSpacing: 10,
+                                  mainAxisSpacing: 10),
+                          scrollDirection: Axis.horizontal,
+                          children: _buildFilmCardList(),
+                        ),
+                      )
+                    ],
                   ),
-                  Container(child: _buildFilmInformation()),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              )),
+                ),
+              ]),
             )));
   }
 
-  Column _buildFilmInformation() {
+  Column _buildInfo() {
     return Column(
       children: [
-        Text(
-          film!.nazivFilma!,
-          style: const TextStyle(
+        Text(film!.nazivFilma!,
+            textAlign: TextAlign.left,
+            style: const TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 34, 67, 94)),
-        ),
+              color: Color.fromARGB(255, 34, 67, 94),
+            )),
         const SizedBox(
           height: 6,
         ),
+        Text("Možda će vam se svidjeti:",
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Color.fromARGB(255, 34, 67, 94))),
         const SizedBox(
           height: 6,
         ),
-        Text("Redatelj: ${film!.redatelj!.ime!} ${film!.redatelj!.prezime!}",
-            style: const TextStyle(fontSize: 16)),
-        const SizedBox(
-          height: 6,
-        ),
-        Text("Glavna uloga: ${film!.glumac!.ime!} ${film!.glumac!.prezime!}",
-            style: const TextStyle(fontSize: 16)),
-        const SizedBox(
-          height: 6,
-        ),
-        Text("Godina: ${godina.format(film!.godina!)}.",
-            style: const TextStyle(fontSize: 16)),
-        const SizedBox(
-          height: 6,
-        ),
-        Text("Ocjena: ${formatter.format(film!.ocjena!)}",
-            style: const TextStyle(fontSize: 16)),
-        const SizedBox(
-          height: 6,
-        )
       ],
     );
+  }
+
+  List<Widget> _buildFilmCardList() {
+    if (recommended.length == 0) {
+      return [Text("Loading....")];
+    }
+
+    List<Widget> list = recommended
+        .map((x) => Container(
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  FilmDetailsScreen(film: x)));
+                    },
+                    child: Container(
+                      height: 150,
+                      child: imageFromBase64String(x.poster!),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                    x.nazivFilma ?? "",
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Color.fromARGB(255, 34, 67, 94)),
+                  ),
+                ],
+              ),
+            ))
+        .cast<Widget>()
+        .toList();
+    return list;
   }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TvojFilm.Model;
 using TvojFilm.Services.Database;
 using TvojFilm.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace TvojFilm.Services
 {
@@ -42,7 +43,7 @@ namespace TvojFilm.Services
                 double similarity = GetSimilarity(ratings1, ratings2);
                 if (similarity > 0.5)
                 {
-                    recommendedProduct.Add(_context.Filmovi.Where(w => w.FilmId == product.Key).FirstOrDefault());
+                    recommendedProduct.Add(_context.Filmovi.Include(x => x.Redatelj).Include(x => x.Glumac).Include(x => x.Zanr).Include(x => x.Drzava).AsQueryable().Where(w => w.FilmId == product.Key).FirstOrDefault());
                 }
                 ratings1.Clear();
                 ratings2.Clear();

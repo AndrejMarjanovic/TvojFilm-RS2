@@ -5,10 +5,10 @@ import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/model/kupnja.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
-import 'package:tvojfilmmobile/provider/glumci_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_provider.dart';
+import 'package:tvojfilmmobile/provider/recommended_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
@@ -18,9 +18,9 @@ void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FilmoviProvider()),
         ChangeNotifierProvider(create: (_) => KorisniciProvider()),
-        ChangeNotifierProvider(create: (_) => GlumciProvider()),
         ChangeNotifierProvider(create: (_) => KupnjaInsertProvider()),
-        ChangeNotifierProvider(create: (_) => KupnjaProvider())
+        ChangeNotifierProvider(create: (_) => KupnjaProvider()),
+        ChangeNotifierProvider(create: (_) => RecommendedProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
