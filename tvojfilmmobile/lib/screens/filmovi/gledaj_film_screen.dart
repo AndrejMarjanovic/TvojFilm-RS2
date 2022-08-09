@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:tvojfilmmobile/model/film.dart';
+import 'package:tvojfilmmobile/model/komentari.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
+import 'package:tvojfilmmobile/provider/komentari_provider.dart';
 import 'package:tvojfilmmobile/provider/recommended_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/widgets/master_screen.dart';
@@ -22,7 +24,10 @@ class GledajFilmScreen extends StatefulWidget {
 class _GledajFilmScreenState extends State<GledajFilmScreen> {
   final Film? film;
   RecommendedProvider? _recommendedProvider = null;
+  KomentariProvider? _komentariProvider = null;
   List<Film> recommended = [];
+  List<Komentar> komentari = [];
+  var datum = DateFormat('MMM d, yyyy');
 
   late YoutubePlayerController controller;
 
@@ -40,10 +45,17 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
     super.dispose();
   }
 
-  Future loadData() async {
-    var Data = await _recommendedProvider?.get({'id': film!.filmId});
+  Future loadRecommended() async {
+    var Recommended = await _recommendedProvider?.get({'id': film!.filmId});
     setState(() {
-      recommended = Data!;
+      recommended = Recommended!;
+    });
+  }
+
+  Future loadComments() async {
+    var Komentari = await _komentariProvider?.get({'filmId': film!.filmId});
+    setState(() {
+      komentari = Komentari!;
     });
   }
 
@@ -51,6 +63,7 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
   void initState() {
     super.initState();
     _recommendedProvider = context.read<RecommendedProvider>();
+    _komentariProvider = context.read<KomentariProvider>();
 
     var url = film!.filmLink!;
     var video = YoutubePlayer.convertUrlToId(url);
@@ -66,7 +79,8 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
           flags: const YoutubePlayerFlags(autoPlay: false));
     }
 
-    loadData();
+    loadRecommended();
+    loadComments();
   }
 
   @override
@@ -76,53 +90,87 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
           controller: controller,
         ),
         builder: (context, player) => Scaffold(
-            backgroundColor: Colors.grey[100],
-            appBar: AppBar(
-              iconTheme: const IconThemeData(
-                  color: Color.fromARGB(255, 235, 235, 235)),
-              title: Text(film!.nazivFilma!,
-                  style: const TextStyle(
-                      color: Color.fromARGB(255, 235, 235, 235))),
-              backgroundColor: Color.fromARGB(255, 21, 84, 136),
-              centerTitle: true,
-              elevation: 0.0,
+              backgroundColor: Colors.grey[100],
+              appBar: AppBar(
+                iconTheme: const IconThemeData(
+                    color: Color.fromARGB(255, 235, 235, 235)),
+                title: Text(film!.nazivFilma!,
+                    style: const TextStyle(
+                        color: Color.fromARGB(255, 235, 235, 235))),
+                backgroundColor: Color.fromARGB(255, 21, 84, 136),
+                centerTitle: true,
+                elevation: 0.0,
+              ),
+              body: Column(
+                children: <Widget>[
+                  player,
+                  Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Align(
+                          child: _buildInfo(),
+                          alignment: Alignment.centerLeft)),
+                  _buildPage(),
+                ],
+              ),
+            ));
+  }
+
+  Expanded _buildPage() {
+    return Expanded(
+        child: SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text("Možda vam se svidi:",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 34, 67, 94))),
+          const SizedBox(
+            height: 6,
+          ),
+          const SizedBox(
+            height: 2,
+          ),
+          Container(
+              height: 180,
+              child: GridView(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    childAspectRatio: 4 / 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10),
+                scrollDirection: Axis.horizontal,
+                children: _buildFilmCardList(),
+              )),
+          const SizedBox(
+            height: 6,
+          ),
+          Align(
+              child: Text("Komentari:",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Color.fromARGB(255, 34, 67, 94))),
+              alignment: Alignment.centerLeft),
+          const SizedBox(
+            height: 6,
+          ),
+          Container(
+            height: 200,
+            child: GridView(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  childAspectRatio: 4 / 1,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10),
+              scrollDirection: Axis.vertical,
+              children: _buildCommentList(),
             ),
-            body: SafeArea(
-              child: Column(children: [
-                player,
-                const SizedBox(
-                  height: 10,
-                ),
-                SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                          child: Align(
-                              child: _buildInfo(),
-                              alignment: Alignment.centerLeft)),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Container(
-                        height: 180,
-                        child: GridView(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 1,
-                                  childAspectRatio: 4 / 3,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10),
-                          scrollDirection: Axis.horizontal,
-                          children: _buildFilmCardList(),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ]),
-            )));
+          ),
+        ],
+      ),
+    ));
   }
 
   Column _buildInfo() {
@@ -135,14 +183,6 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
               fontWeight: FontWeight.bold,
               color: Color.fromARGB(255, 34, 67, 94),
             )),
-        const SizedBox(
-          height: 6,
-        ),
-        Text("Možda će vam se svidjeti:",
-            style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: Color.fromARGB(255, 34, 67, 94))),
         const SizedBox(
           height: 6,
         ),
@@ -184,6 +224,55 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
                   ),
                 ],
               ),
+            ))
+        .cast<Widget>()
+        .toList();
+    return list;
+  }
+
+  List<Widget> _buildCommentList() {
+    if (komentari.length == 0) {
+      return [Text("Za sada nema komentara na ovaj film...")];
+    }
+
+    List<Widget> list = komentari
+        .map((x) => Container(
+              color: Color.fromARGB(255, 219, 219, 219),
+              child: Column(
+                children: [
+                  Align(
+                      child: Text(x.korisnik!.username!,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Color.fromARGB(255, 34, 67, 94))),
+                      alignment: Alignment.centerLeft),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Align(
+                      child: Text(x.komentar!,
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
+                              color: Color.fromARGB(255, 12, 14, 15))),
+                      alignment: Alignment.centerLeft),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Align(
+                      child: Text(datum.format(x.datumKomentara!),
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 10,
+                              color: Color.fromARGB(255, 73, 73, 73))),
+                      alignment: Alignment.centerLeft),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                ],
+              ),
+              width: MediaQuery.of(context).size.width,
             ))
         .cast<Widget>()
         .toList();

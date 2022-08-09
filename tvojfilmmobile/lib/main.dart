@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tvojfilmmobile/model/Korisnici.dart';
-import 'package:tvojfilmmobile/model/film.dart';
-import 'package:tvojfilmmobile/model/kupnja.dart';
-import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
+import 'package:tvojfilmmobile/provider/komentari_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_provider.dart';
@@ -20,7 +17,8 @@ void main() => runApp(MultiProvider(
         ChangeNotifierProvider(create: (_) => KorisniciProvider()),
         ChangeNotifierProvider(create: (_) => KupnjaInsertProvider()),
         ChangeNotifierProvider(create: (_) => KupnjaProvider()),
-        ChangeNotifierProvider(create: (_) => RecommendedProvider())
+        ChangeNotifierProvider(create: (_) => RecommendedProvider()),
+        ChangeNotifierProvider(create: (_) => KomentariProvider())
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
