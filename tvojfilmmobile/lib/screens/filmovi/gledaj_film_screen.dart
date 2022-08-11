@@ -1,15 +1,18 @@
 import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/model/komentari.dart';
+import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:tvojfilmmobile/provider/komentari_provider.dart';
 import 'package:tvojfilmmobile/provider/recommended_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
+import 'package:tvojfilmmobile/widgets/alert_dialog_widget.dart';
 import 'package:tvojfilmmobile/widgets/master_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import '../../utils/util.dart';
@@ -25,9 +28,12 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
   final Film? film;
   RecommendedProvider? _recommendedProvider = null;
   KomentariProvider? _komentariProvider = null;
+
+  TextEditingController _commentController = TextEditingController();
+
   List<Film> recommended = [];
   List<Komentar> komentari = [];
-  var datum = DateFormat('MMM d, yyyy');
+  var datum = DateFormat('MMM d, yyyy' '  ' 'HH' ':' 'mm');
 
   late YoutubePlayerController controller;
 
@@ -55,7 +61,7 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
   Future loadComments() async {
     var Komentari = await _komentariProvider?.get({'filmId': film!.filmId});
     setState(() {
-      komentari = Komentari!;
+      komentari = Komentari!.reversed.toList();
     });
   }
 
@@ -143,6 +149,10 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
                 scrollDirection: Axis.horizontal,
                 children: _buildFilmCardList(),
               )),
+          const SizedBox(
+            height: 6,
+          ),
+          _buildComment(),
           const SizedBox(
             height: 6,
           ),
@@ -277,5 +287,53 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
         .cast<Widget>()
         .toList();
     return list;
+  }
+
+  Widget _buildComment() {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: TextField(
+              controller: _commentController,
+              inputFormatters: [LengthLimitingTextInputFormatter(200)],
+              onSubmitted: (value) async {
+                Map comment = {
+                  "komentar": value.toString(),
+                  "korisnikId": BaseProvider.korisnikID,
+                  "filmId": film!.filmId,
+                };
+
+                try {
+                  await _komentariProvider!.insert(comment);
+                  var tempData =
+                      await _komentariProvider?.get({'filmId': film!.filmId});
+                  setState(() {
+                    _commentController.clear();
+                    komentari = tempData!.reversed.toList();
+                  });
+                } catch (e) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContex) => AlertDialogWidget(
+                            title: "Error",
+                            message: "An error occured!",
+                            context: dialogContex,
+                          ));
+                }
+              },
+              decoration: InputDecoration(
+                  hintText: "Komentiraj",
+                  suffixIcon: Icon(Icons.comment),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          BorderSide(color: Color.fromARGB(255, 21, 84, 136)))),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }

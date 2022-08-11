@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:provider/provider.dart';
+import 'package:tvojfilmmobile/model/kupnja.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
+import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
 
 import '../../model/film.dart';
 import '../../model/kupnjaInsert.dart';
@@ -118,13 +120,15 @@ class _KupnjaFilmaState extends State<KupnjaFilmaScreen> {
             try {
               await _kupnjaInsertProvider.insert(order);
               setState(() {});
-              showDialog(
-                  context: context,
-                  builder: (BuildContext dialogContex) => AlertDialogWidget(
-                        title: "Message",
-                        message: "Uspješno izvršeno!",
-                        context: dialogContex,
-                      ));
+              await _showDialog(
+                  "Uspješno izvršeno! Film je dodan u vašu videoteku.", false);
+
+              Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const VideotekaScreen(),
+                ),
+                (route) => false,
+              );
             } catch (e) {
               showDialog(
                   context: context,

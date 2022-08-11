@@ -33,5 +33,11 @@ namespace TvojFilm.Services
             var list = query.ToList();
             return _mapper.Map<List<TvojFilm.Model.FilmoviKomentari>>(list);
         }
+
+        public override void BeforeInsert(FilmoviKomentariInsertRequest insert, FilmoviKomentari entity)
+        {
+            entity.DatumKomentara = DateTime.Now;
+            base.BeforeInsert(insert, entity);
+        }
     }
 }

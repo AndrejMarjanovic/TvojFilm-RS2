@@ -35,7 +35,6 @@ namespace TvojFilm.Services
 
         public override void BeforeInsert(KupnjaFilmovaInsertRequest insert, KupnjaFilmova entity)
         {
-            //entity.KorisnikId
             entity.DatumKupovine = DateTime.Now;
             base.BeforeInsert(insert, entity);
         }
