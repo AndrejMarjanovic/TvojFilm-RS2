@@ -5,6 +5,7 @@ import 'package:tvojfilmmobile/provider/komentari_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_provider.dart';
+import 'package:tvojfilmmobile/provider/ocjene_provider.dart';
 import 'package:tvojfilmmobile/provider/recommended_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
@@ -18,6 +19,7 @@ void main() => runApp(MultiProvider(
         ChangeNotifierProvider(create: (_) => KupnjaInsertProvider()),
         ChangeNotifierProvider(create: (_) => KupnjaProvider()),
         ChangeNotifierProvider(create: (_) => RecommendedProvider()),
+        ChangeNotifierProvider(create: (_) => OcjeneProvider()),
         ChangeNotifierProvider(create: (_) => KomentariProvider())
       ],
       child: MaterialApp(

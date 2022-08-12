@@ -34,5 +34,11 @@ namespace TvojFilm.Services
             var list = query.ToList();
             return _mapper.Map<List<Model.FilmoviOcjene>>(list);
         }
+
+        public override void BeforeInsert(FilmoviOcjeneInsertRequest insert, FilmoviOcjene entity)
+        {
+            entity.DatumOcjene = DateTime.Now;
+            base.BeforeInsert(insert, entity);
+        }
     }
 }

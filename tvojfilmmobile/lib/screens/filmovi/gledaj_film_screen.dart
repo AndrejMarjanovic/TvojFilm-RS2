@@ -2,19 +2,20 @@ import 'dart:ui';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import 'dart:convert';
 import 'package:tvojfilmmobile/model/film.dart';
 import 'package:tvojfilmmobile/model/komentari.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
-import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
 import 'package:tvojfilmmobile/provider/komentari_provider.dart';
+import 'package:tvojfilmmobile/provider/ocjene_provider.dart';
 import 'package:tvojfilmmobile/provider/recommended_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/widgets/alert_dialog_widget.dart';
-import 'package:tvojfilmmobile/widgets/master_screen.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import '../../model/ocjena.dart';
 import '../../utils/util.dart';
 
 class GledajFilmScreen extends StatefulWidget {
@@ -28,11 +29,14 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
   final Film? film;
   RecommendedProvider? _recommendedProvider = null;
   KomentariProvider? _komentariProvider = null;
+  OcjeneProvider? _ocjeneProvider = null;
 
   TextEditingController _commentController = TextEditingController();
 
   List<Film> recommended = [];
   List<Komentar> komentari = [];
+  List<Ocjena> ocjene = [];
+  double initRating = 0;
   var datum = DateFormat('MMM d, yyyy' '  ' 'HH' ':' 'mm');
 
   late YoutubePlayerController controller;
@@ -65,11 +69,23 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
     });
   }
 
+  Future loadRating() async {
+    var ocjena = await _ocjeneProvider
+        ?.get({'filmId': film!.filmId, 'korisnikId': BaseProvider.korisnikID});
+    setState(() {
+      ocjene = ocjena!;
+      if (ocjene.isNotEmpty) {
+        initRating = ocjene.first.ocjena!;
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _recommendedProvider = context.read<RecommendedProvider>();
     _komentariProvider = context.read<KomentariProvider>();
+    _ocjeneProvider = context.read<OcjeneProvider>();
 
     var url = film!.filmLink!;
     var video = YoutubePlayer.convertUrlToId(url);
@@ -87,6 +103,7 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
 
     loadRecommended();
     loadComments();
+    loadRating();
   }
 
   @override
@@ -121,12 +138,100 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
             ));
   }
 
+  Center _buildRating() {
+    return Center(
+        child: RatingBar.builder(
+            initialRating: initRating,
+            minRating: 1,
+            direction: Axis.horizontal,
+            allowHalfRating: true,
+            itemCount: 5,
+            itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+            itemBuilder: (context, _) => Icon(
+                  Icons.star,
+                  color: Color.fromARGB(255, 192, 164, 79),
+                ),
+            onRatingUpdate: (rating) async {
+              if (ocjene.isEmpty) {
+                Map ocjenaInsert = {
+                  "ocjena": rating.toDouble(),
+                  "korisnikId": BaseProvider.korisnikID,
+                  "filmId": film!.filmId,
+                };
+
+                try {
+                  await _ocjeneProvider!.insert(ocjenaInsert);
+
+                  await showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContex) => AlertDialogWidget(
+                            title: "Uspješno!",
+                            message:
+                                "Vaša ocjena za ovaj film uspješno je dodana.",
+                            context: dialogContex,
+                          ));
+                  setState(() {});
+                } catch (e) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContex) => AlertDialogWidget(
+                            title: "Error",
+                            message: "An error occured!",
+                            context: dialogContex,
+                          ));
+                }
+              } else {
+                Map ocjenaInsert = {
+                  "ocjena": rating.toDouble(),
+                  "korisnikId": BaseProvider.korisnikID,
+                  "filmId": film!.filmId,
+                };
+
+                try {
+                  await _ocjeneProvider!
+                      .update(ocjene.first.filmOcjenaId!, ocjenaInsert);
+
+                  await showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContex) => AlertDialogWidget(
+                            title: "Izmjena uspješna!",
+                            message:
+                                "Vaša ocjena za ovaj film uspješno je izmjenjena.",
+                            context: dialogContex,
+                          ));
+
+                  setState(() {});
+                } catch (e) {
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext dialogContex) => AlertDialogWidget(
+                            title: "Error",
+                            message: "An error occured!",
+                            context: dialogContex,
+                          ));
+                }
+              }
+            }));
+  }
+
   Expanded _buildPage() {
     return Expanded(
         child: SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Text("Ocijeni film:",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  color: Color.fromARGB(255, 34, 67, 94))),
+          const SizedBox(
+            height: 6,
+          ),
+          _buildRating(),
+          const SizedBox(
+            height: 6,
+          ),
           Text("Možda vam se svidi:",
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -250,33 +355,42 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
               color: Color.fromARGB(255, 219, 219, 219),
               child: Column(
                 children: [
-                  Align(
-                      child: Text(x.korisnik!.username!,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Color.fromARGB(255, 34, 67, 94))),
-                      alignment: Alignment.centerLeft),
                   const SizedBox(
                     height: 3,
                   ),
-                  Align(
-                      child: Text(x.komentar!,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                              color: Color.fromARGB(255, 12, 14, 15))),
-                      alignment: Alignment.centerLeft),
+                  Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Align(
+                          child: Text(x.korisnik!.username!,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                  color: Color.fromARGB(255, 34, 67, 94))),
+                          alignment: Alignment.centerLeft)),
                   const SizedBox(
                     height: 3,
                   ),
-                  Align(
-                      child: Text(datum.format(x.datumKomentara!),
-                          style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 10,
-                              color: Color.fromARGB(255, 73, 73, 73))),
-                      alignment: Alignment.centerLeft),
+                  Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Align(
+                          child: Text(x.komentar!,
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14,
+                                  color: Color.fromARGB(255, 12, 14, 15))),
+                          alignment: Alignment.centerLeft)),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.only(left: 10.0, right: 10.0),
+                      child: Align(
+                          child: Text(datum.format(x.datumKomentara!),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 10,
+                                  color: Color.fromARGB(255, 73, 73, 73))),
+                          alignment: Alignment.centerLeft)),
                   const SizedBox(
                     height: 3,
                   ),
@@ -325,7 +439,7 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
               },
               decoration: InputDecoration(
                   hintText: "Komentiraj",
-                  suffixIcon: Icon(Icons.comment),
+                  prefixIcon: Icon(Icons.comment),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide:
