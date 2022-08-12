@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tvojfilmmobile/provider/filmovi_porvider.dart';
+import 'package:tvojfilmmobile/provider/gradovi_provider.dart';
 import 'package:tvojfilmmobile/provider/komentari_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
@@ -10,6 +11,7 @@ import 'package:tvojfilmmobile/provider/recommended_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
+import 'package:tvojfilmmobile/screens/korisnik/registracija_screen.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 
 void main() => runApp(MultiProvider(
@@ -20,6 +22,7 @@ void main() => runApp(MultiProvider(
         ChangeNotifierProvider(create: (_) => KupnjaProvider()),
         ChangeNotifierProvider(create: (_) => RecommendedProvider()),
         ChangeNotifierProvider(create: (_) => OcjeneProvider()),
+        ChangeNotifierProvider(create: (_) => GradoviProvider()),
         ChangeNotifierProvider(create: (_) => KomentariProvider())
       ],
       child: MaterialApp(
@@ -44,6 +47,7 @@ void main() => runApp(MultiProvider(
           '/Details': (context) => FilmDetailsScreen(),
           '/Videoteka': (context) => VideotekaScreen(),
           '/LogOut': (context) => HomePage(),
+          '/Registracija': (context) => RegistracijaScreen(),
         },
       ),
     ));
@@ -56,6 +60,17 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _korisniciProvider = context.read<KorisniciProvider>();
+
+    final txtRegistracija = InkWell(
+      child: const Text(
+        "Registriraj se!",
+        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+      ),
+      onTap: () async {
+        Navigator.of(context).pushReplacementNamed('/Registracija');
+      },
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text("TvojFilm"),
@@ -193,7 +208,8 @@ class HomePage extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            Text("Forgot password?"),
+            Text("Nemate račun?"),
+            txtRegistracija,
             SizedBox(
               height: 40,
             ),

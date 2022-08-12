@@ -11,7 +11,7 @@ class Zanr {
 
   factory Zanr.fromJson(Map<String, dynamic> json) {
     return Zanr(
-      zanrId: json["glumacId"],
+      zanrId: json["zanrId"],
       naziv: json['naziv'],
     );
   }

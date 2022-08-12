@@ -9,7 +9,6 @@ namespace TvojFilm.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
     public class KorisniciController : ControllerBase
     {
 
@@ -18,8 +17,9 @@ namespace TvojFilm.Controllers
         {
             _service = service;
         }
-
+        
         [HttpGet]
+        [Authorize]
         public List<Model.Korisnici> Get([FromQuery] KorisnikSearchRequest request)
         {
             return _service.Get(request);
@@ -32,18 +32,21 @@ namespace TvojFilm.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize]
         public void Delete(int id)
         {
             _service.Delete(id);
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public Model.Korisnici Update(int id, [FromBody] KorisnikUpdateRequest request)
         {
             return _service.Update(id, request);
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public Model.Korisnici GetById(int id)
         {
             return _service.GetbyId(id);
