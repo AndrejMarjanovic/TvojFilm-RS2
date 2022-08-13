@@ -8,6 +8,7 @@ import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_provider.dart';
 import 'package:tvojfilmmobile/provider/ocjene_provider.dart';
 import 'package:tvojfilmmobile/provider/recommended_provider.dart';
+import 'package:tvojfilmmobile/provider/registracija_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
@@ -18,6 +19,7 @@ void main() => runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => FilmoviProvider()),
         ChangeNotifierProvider(create: (_) => KorisniciProvider()),
+        ChangeNotifierProvider(create: (_) => RegistracijaProvider()),
         ChangeNotifierProvider(create: (_) => KupnjaInsertProvider()),
         ChangeNotifierProvider(create: (_) => KupnjaProvider()),
         ChangeNotifierProvider(create: (_) => RecommendedProvider()),
@@ -63,8 +65,11 @@ class HomePage extends StatelessWidget {
 
     final txtRegistracija = InkWell(
       child: const Text(
-        "Registriraj se!",
-        style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w500),
+        "Kreirajte ga!",
+        style: TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.w500,
+            color: Color.fromARGB(255, 21, 84, 136)),
       ),
       onTap: () async {
         Navigator.of(context).pushReplacementNamed('/Registracija');

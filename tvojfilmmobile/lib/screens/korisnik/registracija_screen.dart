@@ -2,9 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tvojfilmmobile/model/grad.dart';
-import 'package:tvojfilmmobile/provider/gradovi_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
+import 'package:tvojfilmmobile/provider/registracija_provider.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 import 'package:tvojfilmmobile/widgets/text_imput.dart';
 import '../../widgets/alert_dialog_widget.dart';
@@ -17,6 +16,7 @@ class RegistracijaScreen extends StatefulWidget {
 }
 
 class _RegistracijaScreenState extends State<RegistracijaScreen> {
+  late RegistracijaProvider _registracijaProvider;
   late KorisniciProvider _korisniciProvider;
 
   final TextEditingController _imeController = TextEditingController();
@@ -43,6 +43,7 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
 
   @override
   void initState() {
+    _registracijaProvider = context.read<RegistracijaProvider>();
     _korisniciProvider = context.read<KorisniciProvider>();
     setState(() {});
     super.initState();
@@ -264,7 +265,6 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
             "password": _passwordController.text,
             "passwordConfirm": _passwordConfirmationController.text,
             "gradId": 1,
-            "ulogaId": 2,
           };
           if (_passwordController.text !=
               _passwordConfirmationController.text) {
@@ -277,7 +277,7 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
                     ));
           } else {
             try {
-              await _korisniciProvider.insert(register);
+              await _registracijaProvider.insert(register);
               await showDialog(
                   context: context,
                   builder: (BuildContext dialogContex) => AlertDialogWidget(

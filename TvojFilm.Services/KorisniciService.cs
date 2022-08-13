@@ -88,9 +88,20 @@ namespace TvojFilm.Services
             {
                 throw new UserException("Lozinke se ne poklapaju");
             }
-            if (db.Korisnici.Where(u => u.Username == request.Username).Count() > 0)
+
+            db.Add(k);
+
+            k.PasswordSalt = GenerateSalt();
+            k.PasswordHash = GenerateHash(k.PasswordSalt, request.Password);
+
+            db.SaveChanges();
+
+            return mapper.Map<Model.Korisnici>(k);
+        }
+
+            if (request.Password != request.PasswordConfirm)
             {
-                throw new UserException("Korisničko ime zauzeto");
+                throw new UserException("Lozinke se ne poklapaju");
             }
 
             db.Add(k);

@@ -92,7 +92,7 @@ class _VideotekaScreenState extends State<VideotekaScreen> {
 
   List<Widget> _buildFilmCardList() {
     if (data.length == 0) {
-      return [Text("Loading....")];
+      return [Text("Trenutno nema filmova u vašoj videoteci....")];
     }
 
     List<Widget> list = data

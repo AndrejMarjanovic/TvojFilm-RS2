@@ -17,36 +17,43 @@ namespace TvojFilm.Controllers
         {
             _service = service;
         }
-        
-        [HttpGet]
+
         [Authorize]
+        [HttpGet]
         public List<Model.Korisnici> Get([FromQuery] KorisnikSearchRequest request)
         {
             return _service.Get(request);
         }
 
+        [Authorize]
         [HttpPost]
         public Model.Korisnici Insert(KorisnikInsertRequest request)
         {
             return _service.Insert(request);
         }
 
-        [HttpDelete("{id}")]
+        [HttpPost("Registracija")]
+        public Model.Korisnici Insert(KorisnikRegisterRequest request)
+        {
+            return _service.Register(request);
+        }
+
         [Authorize]
+        [HttpDelete("{id}")]
         public void Delete(int id)
         {
             _service.Delete(id);
         }
 
-        [HttpPut("{id}")]
         [Authorize]
+        [HttpPut("{id}")]
         public Model.Korisnici Update(int id, [FromBody] KorisnikUpdateRequest request)
         {
             return _service.Update(id, request);
         }
 
-        [HttpGet("{id}")]
         [Authorize]
+        [HttpGet("{id}")]
         public Model.Korisnici GetById(int id)
         {
             return _service.GetbyId(id);
