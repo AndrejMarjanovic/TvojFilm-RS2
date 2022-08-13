@@ -99,6 +99,11 @@ namespace TvojFilm.Services
             return mapper.Map<Model.Korisnici>(k);
         }
 
+        public Model.Korisnici Register(KorisnikRegisterRequest request)
+        {
+            var k = mapper.Map<Korisnici>(request);
+            k.UlogaId = 2;
+
             if (request.Password != request.PasswordConfirm)
             {
                 throw new UserException("Lozinke se ne poklapaju");
