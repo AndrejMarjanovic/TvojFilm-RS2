@@ -1,18 +1,14 @@
 import 'dart:convert';
 import 'dart:core';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/credit_card_widget.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:provider/provider.dart';
-import 'package:tvojfilmmobile/model/kupnja.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
-
 import '../../model/film.dart';
 import '../../model/kupnjaInsert.dart';
 import '../../provider/kupnja_insert_provider.dart';
-import '../../provider/kupnja_provider.dart';
 import '../../widgets/alert_dialog_widget.dart';
 
 class KupnjaFilmaScreen extends StatefulWidget {

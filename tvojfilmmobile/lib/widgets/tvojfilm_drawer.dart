@@ -41,6 +41,13 @@ class tvojFilmDrawer extends StatelessWidget {
             },
           ),
           ListTile(
+            title: Text('Predloži film',
+                style: TextStyle(color: Color.fromARGB(255, 212, 215, 221))),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/PredloziFilm');
+            },
+          ),
+          ListTile(
             title: Text('Odjava',
                 style: TextStyle(color: Color.fromARGB(255, 69, 151, 218))),
             onTap: () {

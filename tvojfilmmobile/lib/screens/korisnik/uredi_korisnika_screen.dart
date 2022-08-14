@@ -3,7 +3,9 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tvojfilmmobile/model/Korisnici.dart';
+import 'package:tvojfilmmobile/model/grad.dart';
 import 'package:tvojfilmmobile/provider/base_provider.dart';
+import 'package:tvojfilmmobile/provider/gradovi_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/widgets/text_imput.dart';
 import 'package:tvojfilmmobile/widgets/tvojfilm_drawer.dart';
@@ -19,16 +21,29 @@ class UrediKorisnikaScreen extends StatefulWidget {
 
 class _UrediKorisnikaScreenState extends State<UrediKorisnikaScreen> {
   late KorisniciProvider _korisnikProvider;
+  GradoviProvider? _gradoviProvider = null;
   Korisnici korisnik = Korisnici();
+  List<Grad> gradovi = [];
+
+  int? selectedValue;
 
   @override
   void initState() {
     _korisnikProvider = context.read<KorisniciProvider>();
+    _gradoviProvider = context.read<GradoviProvider>();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ucitajKorisnickePodatke();
+      loadGradovi();
       setState(() {});
     });
     super.initState();
+  }
+
+  Future loadGradovi() async {
+    var Gradovi = await _gradoviProvider?.get();
+    setState(() {
+      gradovi = Gradovi!;
+    });
   }
 
   Future<Korisnici> ucitajKorisnickePodatke() async {
@@ -91,6 +106,19 @@ class _UrediKorisnikaScreenState extends State<UrediKorisnikaScreen> {
               "${_odabraniDatumRodjenja.toLocal()}".split(' ')[0];
         });
       }
+    }
+
+    List<DropdownMenuItem> _GradoviDropDownList() {
+      if (gradovi.length == 0) {
+        return [];
+      }
+      List<DropdownMenuItem> list = gradovi
+          .map((x) => DropdownMenuItem(
+                child: Text(x.naziv!, style: TextStyle(color: Colors.black)),
+                value: x.gradId,
+              ))
+          .toList();
+      return list;
     }
 
     final dtpDatumRodjenja = InkWell(
@@ -259,7 +287,7 @@ class _UrediKorisnikaScreenState extends State<UrediKorisnikaScreen> {
             "password": _passwordController.text,
             "passwordConfirm": _passwordConfirmationController.text,
             "ulogaId": korisnik.ulogaId,
-            "gradId": korisnik.gradId,
+            "gradId": selectedValue,
           };
           if (_passwordController.text !=
               _passwordConfirmationController.text) {
@@ -318,6 +346,7 @@ class _UrediKorisnikaScreenState extends State<UrediKorisnikaScreen> {
                 korisnik.datumRodjenja!.toString();
             _usernameController.text = korisnik.username!;
             _telefonController.text = korisnik.telefon!;
+            selectedValue = korisnik.gradId;
 
             return Center(
                 child: Container(
@@ -353,6 +382,30 @@ class _UrediKorisnikaScreenState extends State<UrediKorisnikaScreen> {
                             txtEmail,
                             const SizedBox(height: 16),
                             dtpDatumRodjenja,
+                            const SizedBox(height: 16),
+                            DropdownButtonFormField(
+                              items: _GradoviDropDownList(),
+                              value: selectedValue,
+                              decoration: InputDecoration(
+                                  labelText: "Grad",
+                                  labelStyle: const TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromARGB(255, 32, 32, 32)),
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                      borderSide: BorderSide(
+                                          color:
+                                              Color.fromARGB(255, 35, 57, 75))),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color:
+                                            Color.fromARGB(255, 21, 84, 136)),
+                                  )),
+                              onChanged: (dynamic newValue) {
+                                selectedValue = newValue;
+                              },
+                            ),
                             const SizedBox(height: 16),
                             txtPassword,
                             const SizedBox(height: 16),

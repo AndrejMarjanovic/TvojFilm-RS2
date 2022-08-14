@@ -7,10 +7,12 @@ import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_insert_provider.dart';
 import 'package:tvojfilmmobile/provider/kupnja_provider.dart';
 import 'package:tvojfilmmobile/provider/ocjene_provider.dart';
+import 'package:tvojfilmmobile/provider/prijedlog_provider.dart';
 import 'package:tvojfilmmobile/provider/recommended_provider.dart';
 import 'package:tvojfilmmobile/provider/registracija_provider.dart';
 import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
+import 'package:tvojfilmmobile/screens/filmovi/prijedlog_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
 import 'package:tvojfilmmobile/screens/korisnik/registracija_screen.dart';
 import 'package:tvojfilmmobile/screens/korisnik/uredi_korisnika_screen.dart';
@@ -26,6 +28,7 @@ void main() => runApp(MultiProvider(
         ChangeNotifierProvider(create: (_) => RecommendedProvider()),
         ChangeNotifierProvider(create: (_) => OcjeneProvider()),
         ChangeNotifierProvider(create: (_) => GradoviProvider()),
+        ChangeNotifierProvider(create: (_) => PrijedlogProvider()),
         ChangeNotifierProvider(create: (_) => KomentariProvider())
       ],
       child: MaterialApp(
@@ -52,6 +55,7 @@ void main() => runApp(MultiProvider(
           '/LogOut': (context) => HomePage(),
           '/Registracija': (context) => RegistracijaScreen(),
           '/UrediProfil': (context) => UrediKorisnikaScreen(),
+          '/PredloziFilm': (context) => PrijedlogScreen(),
         },
       ),
     ));
@@ -157,13 +161,17 @@ class HomePage extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                        border: Border(bottom: BorderSide(color: Colors.grey))),
+                        border: Border(
+                            bottom: BorderSide(
+                                color: Color.fromARGB(255, 134, 134, 134)))),
                     child: TextField(
                       controller: _passwordcontroller,
+                      obscureText: true,
                       decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Pasword",
-                          hintStyle: TextStyle(color: Colors.grey[400])),
+                          hintStyle: TextStyle(
+                              color: Color.fromARGB(255, 134, 134, 134))),
                     ),
                   ),
                 ]),

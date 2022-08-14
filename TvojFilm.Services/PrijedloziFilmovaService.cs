@@ -28,5 +28,11 @@ namespace TvojFilm.Services
             var list = query.ToList();
             return _mapper.Map<List<Model.PrijedloziFilmova>>(list);
         }
+
+        public override void BeforeInsert(PrijedloziFilmovaInsertRequest insert, PrijedloziFilmova entity)
+        {
+            entity.DatumPrijedloga = DateTime.Now;
+            base.BeforeInsert(insert, entity);
+        }
     }
 }
