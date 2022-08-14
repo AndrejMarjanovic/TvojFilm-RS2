@@ -20,7 +20,7 @@ class tvojFilmDrawer extends StatelessWidget {
       child: ListView(
         children: [
           ListTile(
-            title: Text('HOME',
+            title: Text('HOME - istraži sadržaj',
                 style: TextStyle(color: Color.fromARGB(255, 212, 215, 221))),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/Films');
@@ -31,6 +31,13 @@ class tvojFilmDrawer extends StatelessWidget {
                 style: TextStyle(color: Color.fromARGB(255, 212, 215, 221))),
             onTap: () {
               Navigator.of(context).pushReplacementNamed('/Videoteka');
+            },
+          ),
+          ListTile(
+            title: Text('Uredi profil',
+                style: TextStyle(color: Color.fromARGB(255, 212, 215, 221))),
+            onTap: () {
+              Navigator.of(context).pushReplacementNamed('/UrediProfil');
             },
           ),
           ListTile(

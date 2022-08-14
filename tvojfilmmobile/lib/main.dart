@@ -13,6 +13,7 @@ import 'package:tvojfilmmobile/screens/filmovi/film_detail_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/filmovi_list_screen.dart';
 import 'package:tvojfilmmobile/screens/filmovi/videoteka_screen.dart';
 import 'package:tvojfilmmobile/screens/korisnik/registracija_screen.dart';
+import 'package:tvojfilmmobile/screens/korisnik/uredi_korisnika_screen.dart';
 import 'package:tvojfilmmobile/utils/util.dart';
 
 void main() => runApp(MultiProvider(
@@ -50,6 +51,7 @@ void main() => runApp(MultiProvider(
           '/Videoteka': (context) => VideotekaScreen(),
           '/LogOut': (context) => HomePage(),
           '/Registracija': (context) => RegistracijaScreen(),
+          '/UrediProfil': (context) => UrediKorisnikaScreen(),
         },
       ),
     ));

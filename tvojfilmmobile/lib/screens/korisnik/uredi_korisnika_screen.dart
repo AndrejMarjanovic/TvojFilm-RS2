@@ -2,73 +2,96 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tvojfilmmobile/model/Korisnici.dart';
+import 'package:tvojfilmmobile/provider/base_provider.dart';
 import 'package:tvojfilmmobile/provider/korisnici_provider.dart';
-import 'package:tvojfilmmobile/provider/registracija_provider.dart';
-import 'package:tvojfilmmobile/utils/util.dart';
 import 'package:tvojfilmmobile/widgets/text_imput.dart';
+import 'package:tvojfilmmobile/widgets/tvojfilm_drawer.dart';
 import '../../widgets/alert_dialog_widget.dart';
 
-class RegistracijaScreen extends StatefulWidget {
-  const RegistracijaScreen({Key? key}) : super(key: key);
+class UrediKorisnikaScreen extends StatefulWidget {
+  static const String routeName = "/user-information";
+  const UrediKorisnikaScreen({Key? key}) : super(key: key);
 
   @override
-  _RegistracijaScreenState createState() => _RegistracijaScreenState();
+  State<UrediKorisnikaScreen> createState() => _UrediKorisnikaScreenState();
 }
 
-class _RegistracijaScreenState extends State<RegistracijaScreen> {
-  late RegistracijaProvider _registracijaProvider;
-  late KorisniciProvider _korisniciProvider;
-
-  final TextEditingController _imeController = TextEditingController();
-  final TextEditingController _prezimeController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _telefonController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController dtpDatumRodjenjaController =
-      TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _passwordConfirmationController =
-      TextEditingController();
-  FocusNode focusNode = FocusNode();
-
-  DateTime _odabraniDatumRodjenja = DateTime.now();
-
-  final _formKey = GlobalKey<FormState>();
-  final _obavezno = "Obavezno polje!";
-
-  bool _isObscure = true;
-  bool _isObscureConfirmation = true;
+class _UrediKorisnikaScreenState extends State<UrediKorisnikaScreen> {
+  late KorisniciProvider _korisnikProvider;
+  Korisnici korisnik = Korisnici();
 
   @override
   void initState() {
-    _registracijaProvider = context.read<RegistracijaProvider>();
-    _korisniciProvider = context.read<KorisniciProvider>();
-    setState(() {});
+    _korisnikProvider = context.read<KorisniciProvider>();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await ucitajKorisnickePodatke();
+      setState(() {});
+    });
     super.initState();
   }
 
-  Future<void> _selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: _odabraniDatumRodjenja,
-        firstDate: DateTime(1900, 1),
-        lastDate: DateTime.now());
-
-    if (picked != null && picked != _odabraniDatumRodjenja) {
-      setState(() {
-        _odabraniDatumRodjenja = picked;
-        dtpDatumRodjenjaController.text =
-            "${_odabraniDatumRodjenja.toLocal()}".split(' ')[0];
-      });
-    }
+  Future<Korisnici> ucitajKorisnickePodatke() async {
+    var Data = await _korisnikProvider.getById(BaseProvider.korisnikID!);
+    return Data;
   }
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme:
+            const IconThemeData(color: Color.fromARGB(255, 235, 235, 235)),
+        title: Text("Moj račun",
+            style: const TextStyle(color: Color.fromARGB(255, 235, 235, 235))),
+        backgroundColor: Color.fromARGB(255, 21, 84, 136),
+        centerTitle: true,
+        elevation: 0.0,
+      ),
+      drawer: tvojFilmDrawer(),
+      backgroundColor: Colors.white,
+      body: body(),
+    );
+  }
+
+  Widget body() {
+    const _obavezno = "Obavezno polje!";
+    final _formKey = GlobalKey<FormState>();
+
+    TextEditingController _imeController = TextEditingController();
+    TextEditingController _prezimeController = TextEditingController();
+    TextEditingController _usernameController = TextEditingController();
+    TextEditingController _telefonController = TextEditingController();
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController dtpDatumRodjenjaController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+    TextEditingController _passwordConfirmationController =
+        TextEditingController();
+
+    DateTime _odabraniDatumRodjenja = DateTime.now();
+
     final txtFirstName =
         TextInputWidget(label: "Ime", controller: _imeController);
     final txtLastName =
         TextInputWidget(label: "Prezime", controller: _prezimeController);
+    final txtUsername =
+        TextInputWidget(label: "Username", controller: _usernameController);
+
+    Future<void> _selectDate(BuildContext context) async {
+      final DateTime? picked = await showDatePicker(
+          context: context,
+          initialDate: _odabraniDatumRodjenja,
+          firstDate: DateTime(1900, 1),
+          lastDate: DateTime.now());
+
+      if (picked != null && picked != _odabraniDatumRodjenja) {
+        setState(() {
+          _odabraniDatumRodjenja = picked;
+          dtpDatumRodjenjaController.text =
+              "${_odabraniDatumRodjenja.toLocal()}".split(' ')[0];
+        });
+      }
+    }
 
     final dtpDatumRodjenja = InkWell(
       child: IgnorePointer(
@@ -153,14 +176,9 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
           )),
     );
 
-    final txtUsername =
-        TextInputWidget(label: "Username", controller: _usernameController);
-
     final txtPassword = TextFormField(
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Password " + _obavezno;
-        } else if (value != null && value.isNotEmpty) {
+        if (value != null && value.isNotEmpty) {
           if (value.length < 4) {
             return "Lozinka mora sadržavati barem 4 karaktera!";
           }
@@ -169,18 +187,9 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
         }
       },
       controller: _passwordController,
-      obscureText: _isObscure,
+      obscureText: true,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-          suffixIcon: IconButton(
-              icon: Icon(
-                _isObscure ? Icons.visibility : Icons.visibility_off,
-              ),
-              onPressed: () {
-                setState(() {
-                  _isObscure = !_isObscure;
-                });
-              }),
           labelText: "Lozinka",
           labelStyle: const TextStyle(
               fontSize: 16, color: Color.fromARGB(255, 32, 32, 32)),
@@ -196,9 +205,7 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
 
     final txtPasswordConfirmation = TextFormField(
       validator: (value) {
-        if (value == null || value.isEmpty) {
-          return "Potvrdite lozinku " + _obavezno;
-        } else if (value != null && value.isNotEmpty) {
+        if (value != null && value.isNotEmpty) {
           if (value != _passwordController.text) {
             return "Lozinka i potvrda lozinke moraju se poklapati!";
           }
@@ -207,20 +214,9 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
         }
       },
       controller: _passwordConfirmationController,
-      obscureText: _isObscureConfirmation,
+      obscureText: true,
       style: const TextStyle(color: Colors.black),
       decoration: InputDecoration(
-          suffixIcon: IconButton(
-              icon: Icon(
-                _isObscureConfirmation
-                    ? Icons.visibility
-                    : Icons.visibility_off,
-              ),
-              onPressed: () {
-                setState(() {
-                  _isObscureConfirmation = !_isObscureConfirmation;
-                });
-              }),
           labelText: "Potvrda lozinke",
           labelStyle: const TextStyle(
               fontSize: 16, color: Color.fromARGB(255, 32, 32, 32)),
@@ -234,7 +230,7 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
           )),
     );
 
-    final btnRegister = InkWell(
+    final btnSpremi = InkWell(
       child: Container(
         height: 50,
         decoration: BoxDecoration(
@@ -245,7 +241,7 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
             ])),
         child: const Center(
             child: Text(
-          "Registracija",
+          "Spremi promjene",
           style: TextStyle(
               fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
         )),
@@ -262,7 +258,8 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
             "username": _usernameController.text,
             "password": _passwordController.text,
             "passwordConfirm": _passwordConfirmationController.text,
-            "gradId": 1,
+            "ulogaId": korisnik.ulogaId,
+            "gradId": korisnik.gradId,
           };
           if (_passwordController.text !=
               _passwordConfirmationController.text) {
@@ -275,20 +272,15 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
                     ));
           } else {
             try {
-              await _registracijaProvider.insert(register);
+              await _korisnikProvider.update(
+                  BaseProvider.korisnikID!, register);
               await showDialog(
                   context: context,
                   builder: (BuildContext dialogContex) => AlertDialogWidget(
-                        title: "Dobrodošli!",
-                        message: "Uspješno ste kreilrali račun!",
+                        title: "Uspjeh!",
+                        message: "Uspješno ste ažurirali podatke!",
                         context: dialogContex,
                       ));
-              Authorization.username = _usernameController.text;
-              Authorization.password = _passwordController.text;
-
-              await _korisniciProvider
-                  .login({'username': Authorization.username});
-              Navigator.of(context).pushReplacementNamed('/Films');
             } catch (e) {
               showDialog(
                   context: context,
@@ -303,61 +295,83 @@ class _RegistracijaScreenState extends State<RegistracijaScreen> {
       },
     );
 
-    final txtTitle = Text("Kreirajte račun",
+    const txtSubtitle = Text("Uredi korisničke podatke.",
         style: TextStyle(
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 21, 84, 136)));
+          fontSize: 20,
+          color: Color.fromARGB(255, 35, 57, 75),
+        ));
 
-    return Scaffold(
-        body: Center(
-      child: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        padding: const EdgeInsets.only(left: 16, right: 16),
-        child: ListView(children: [
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(height: 20.0),
-                Form(
-                  key: _formKey,
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 10,
+    return FutureBuilder(
+        future: ucitajKorisnickePodatke(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: Text("Loading..."));
+          } else if (snapshot.hasError) {
+            return const Center(child: Text("An error occured!"));
+          } else if (snapshot.data is Korisnici) {
+            korisnik = snapshot.data;
+            _imeController.text = korisnik.ime!;
+            _prezimeController.text = korisnik.prezime!;
+            _emailController.text = korisnik.email!;
+            _odabraniDatumRodjenja = korisnik.datumRodjenja!;
+            dtpDatumRodjenjaController.text =
+                korisnik.datumRodjenja!.toString();
+            _usernameController.text = korisnik.username!;
+            _telefonController.text = korisnik.telefon!;
+
+            return Center(
+                child: Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.only(left: 16, right: 16),
+              child: ListView(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Form(
+                        key: _formKey,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 6,
+                            ),
+                            txtSubtitle,
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            txtFirstName,
+                            const SizedBox(height: 16),
+                            txtLastName,
+                            const SizedBox(height: 16),
+                            txtUsername,
+                            const SizedBox(height: 16),
+                            txtPhoneNumber,
+                            const SizedBox(height: 16),
+                            txtEmail,
+                            const SizedBox(height: 16),
+                            dtpDatumRodjenja,
+                            const SizedBox(height: 16),
+                            txtPassword,
+                            const SizedBox(height: 16),
+                            txtPasswordConfirmation,
+                            const SizedBox(height: 20),
+                            btnSpremi,
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
                         ),
-                        txtTitle,
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        txtFirstName,
-                        const SizedBox(height: 16),
-                        txtLastName,
-                        const SizedBox(height: 16),
-                        txtUsername,
-                        const SizedBox(height: 16),
-                        txtPhoneNumber,
-                        const SizedBox(height: 16),
-                        txtEmail,
-                        const SizedBox(height: 16),
-                        dtpDatumRodjenja,
-                        const SizedBox(height: 16),
-                        txtPassword,
-                        const SizedBox(height: 16),
-                        txtPasswordConfirmation,
-                        const SizedBox(height: 20),
-                        btnRegister,
-                        const SizedBox(height: 20),
-                      ]),
-                ),
-              ]),
-        ]),
-      ),
-    ));
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ));
+          }
+          return const Center(child: Text("Error"));
+        });
   }
 }
