@@ -42,6 +42,12 @@ class _VideotekaScreenState extends State<VideotekaScreen> {
     });
   }
 
+  final txtTitle = Text("Vaša kolekcija:",
+      style: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.bold,
+          color: Color.fromARGB(255, 21, 84, 136)));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +55,7 @@ class _VideotekaScreenState extends State<VideotekaScreen> {
         appBar: AppBar(
           iconTheme:
               const IconThemeData(color: Color.fromARGB(255, 235, 235, 235)),
-          title: Text("Moji filmovi",
+          title: Text("Videoteka",
               style:
                   const TextStyle(color: Color.fromARGB(255, 235, 235, 235))),
           backgroundColor: Color.fromARGB(255, 21, 84, 136),
@@ -64,14 +70,15 @@ class _VideotekaScreenState extends State<VideotekaScreen> {
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 6,
+                    height: 10,
                   ),
+                  txtTitle,
                   const SizedBox(
                     height: 6,
                   ),
                   Container(
                     height: MediaQuery.of(context).size.height -
-                        MediaQuery.of(context).size.height / 3,
+                        MediaQuery.of(context).size.height / 5,
                     //height: 550,
                     child: GridView(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

@@ -126,6 +126,7 @@ class _FilmDetailsScreenState extends State<FilmDetailsScreen> {
                 ),
               ),
             ),
+            const SizedBox(width: 15.0),
           ]);
     } else {
       return Row(

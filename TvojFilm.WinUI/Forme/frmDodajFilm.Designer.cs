@@ -206,9 +206,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(243, 182);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 15);
+            this.label1.Size = new System.Drawing.Size(46, 15);
             this.label1.TabIndex = 51;
-            this.label1.Text = "Dodan na:";
+            this.label1.Text = "Datum:";
             // 
             // tbRadnja
             // 

@@ -188,7 +188,7 @@ namespace TvojFilm.WinUI.Forme
                 return false;
             }
             else err.Clear();
-            if (!(tbFilmLink.Text.Contains("https://www.youtube.com/watch?")))
+            if (!(tbFilmLink.Text.Contains("https://www.youtube.com/watch?") || tbFilmLink.Text.Contains("https://youtu.be/")))
             {
                 err.SetError(tbFilmLink, "Unesite validan Youtube link! (https://www.youtube.com/watch?...)");
                 return false;

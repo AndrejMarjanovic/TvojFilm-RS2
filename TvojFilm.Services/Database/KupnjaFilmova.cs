@@ -22,6 +22,5 @@ namespace TvojFilm.Services.Database
         public int FilmId { get; set; }
         public virtual Filmovi Film { get; set; } = null!;
 
-        public bool? Odobreno { get; set; }
     }
 }

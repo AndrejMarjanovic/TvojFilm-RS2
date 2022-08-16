@@ -72,4 +72,10 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<TvojFilmContext>();
+    dataContext.Database.Migrate();
+}
+
 app.Run();

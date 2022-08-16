@@ -170,7 +170,6 @@ class _GledajFilmScreenState extends State<GledajFilmScreen> {
                                 "Vaša ocjena za ovaj film uspješno je dodana.",
                             context: dialogContex,
                           ));
-                  setState(() {});
                 } catch (e) {
                   showDialog(
                       context: context,

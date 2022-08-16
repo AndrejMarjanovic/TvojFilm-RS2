@@ -24,9 +24,6 @@ class _KupnjaFilmaState extends State<KupnjaFilmaScreen> {
   Film? film;
 
   TextStyle style = const TextStyle(fontSize: 18.0);
-  TextEditingController terminController = TextEditingController();
-  TextEditingController brojSjedistaController = TextEditingController();
-  TextEditingController cijenaController = TextEditingController();
 
   String brojKartice = "";
   String datumIsteka = "";

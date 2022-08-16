@@ -33,6 +33,7 @@
             this.tbSugestija = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.Sugestija = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Opis = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Korisnik = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ukloni = new System.Windows.Forms.DataGridViewButtonColumn();
@@ -48,6 +49,7 @@
             this.dgvSugestije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSugestije.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Sugestija,
+            this.Opis,
             this.Korisnik,
             this.Datum,
             this.Ukloni});
@@ -91,26 +93,38 @@
             // 
             // Sugestija
             // 
-            this.Sugestija.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Sugestija.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Sugestija.DataPropertyName = "PrijedlogIme";
             this.Sugestija.HeaderText = "Sugestija";
             this.Sugestija.Name = "Sugestija";
             this.Sugestija.ReadOnly = true;
+            this.Sugestija.Width = 79;
+            // 
+            // Opis
+            // 
+            this.Opis.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Opis.DataPropertyName = "Opis";
+            this.Opis.HeaderText = "Opis";
+            this.Opis.Name = "Opis";
+            this.Opis.ReadOnly = true;
             // 
             // Korisnik
             // 
-            this.Korisnik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Korisnik.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Korisnik.DataPropertyName = "Korisnik";
             this.Korisnik.HeaderText = "Korisnik";
             this.Korisnik.Name = "Korisnik";
             this.Korisnik.ReadOnly = true;
+            this.Korisnik.Width = 74;
             // 
             // Datum
             // 
+            this.Datum.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
             this.Datum.DataPropertyName = "DatumPrijedloga";
             this.Datum.HeaderText = "Datum";
             this.Datum.Name = "Datum";
             this.Datum.ReadOnly = true;
+            this.Datum.Width = 68;
             // 
             // Ukloni
             // 
@@ -148,6 +162,7 @@
         private Label label1;
         private TextBox tbSugestija;
         private DataGridViewTextBoxColumn Sugestija;
+        private DataGridViewTextBoxColumn Opis;
         private DataGridViewTextBoxColumn Korisnik;
         private DataGridViewTextBoxColumn Datum;
         private DataGridViewButtonColumn Ukloni;

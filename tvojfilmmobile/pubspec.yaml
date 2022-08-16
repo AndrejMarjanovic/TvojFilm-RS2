@@ -50,6 +50,7 @@ dependencies:
   youtube_player_flutter: ^8.1.0
   flutter_rating_bar: ^4.0.1
   email_validator: ^2.1.17
+  flutter_paypal: ^0.0.8
   
 
 dev_dependencies:
