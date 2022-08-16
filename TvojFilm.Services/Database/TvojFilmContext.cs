@@ -159,7 +159,8 @@ namespace TvojFilm.Services.Database
             modelBuilder.Entity<Redatelji>().HasData(
                 new Redatelji { RedateljId = 1, Ime = "Christopher", Prezime = "Nolan", DatumRodjenja = DateTime.Parse("1970-07-30T00:00:00")},
                 new Redatelji { RedateljId = 2, Ime = "Quentin", Prezime = "Tarantino", DatumRodjenja = DateTime.Parse("1963-03-27T00:00:00")},
-                new Redatelji { RedateljId = 3, Ime = "Ryan", Prezime = "Coogler", DatumRodjenja = DateTime.Parse("1986-05-23T00:00:00")}
+                new Redatelji { RedateljId = 3, Ime = "Ryan", Prezime = "Coogler", DatumRodjenja = DateTime.Parse("1986-05-23T00:00:00")},
+                new Redatelji { RedateljId = 4, Ime = "Alejandro", Prezime = "G. Iñárritu", DatumRodjenja = DateTime.Parse("1963-08-15T00:00:00")}
                 );
         }
 
@@ -250,6 +251,21 @@ namespace TvojFilm.Services.Database
                      RedateljId = 3,
                      GlumacId = 5,
                      ZanrId = 4,
+                     DrzavaId = 3
+                 },
+                 new Filmovi
+                 {
+                     FilmId = 6,
+                     NazivFilma = "The Revenant",
+                     Godina = DateTime.Parse("2015-12-16T00:00:00"),
+                     Poster = File.ReadAllBytes("Assets/TheRevenant.jpg"),
+                     Cijena = 15,
+                     Ocjena = 8,
+                     Opis = "Film baziran na istoimenoj noveli Michaela Punkea iz 2002., prati iskustva istraživača Hugha Glassa iz 1823. godine. Inspiriran istinitim događajima, Povratnik je uzbudljivo filmsko remek djelo koje prikazuje epsku avanturu preživljavanja jednoga muškarca i izuzetnu moć sna­ge ljudskoga duha.",
+                     FilmLink = "https://www.youtube.com/watch?v=LoebZZ8K5N0",
+                     RedateljId = 4,
+                     GlumacId = 3,
+                     ZanrId = 3,
                      DrzavaId = 3
                  }
                  );
@@ -343,14 +359,6 @@ namespace TvojFilm.Services.Database
                     KorisnikId = 2,
                     FilmId = 5,
                     Ocjena = 2.5,
-                    DatumOcjene = DateTime.Now
-                },
-                new FilmoviOcjene
-                {
-                    FilmOcjenaId = 6,
-                    KorisnikId = 3,
-                    FilmId = 1,
-                    Ocjena = 5,
                     DatumOcjene = DateTime.Now
                 }
                 );
