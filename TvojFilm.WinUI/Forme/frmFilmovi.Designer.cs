@@ -49,6 +49,7 @@
             this.Cijena = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Uredi = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Ukloni = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnReport = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFilmovi)).BeginInit();
             this.SuspendLayout();
@@ -174,7 +175,7 @@
             this.dgvFilmovi.ReadOnly = true;
             this.dgvFilmovi.RowTemplate.Height = 25;
             this.dgvFilmovi.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvFilmovi.Size = new System.Drawing.Size(878, 340);
+            this.dgvFilmovi.Size = new System.Drawing.Size(878, 310);
             this.dgvFilmovi.TabIndex = 0;
             this.dgvFilmovi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFilmovi_CellContentClick);
             // 
@@ -264,12 +265,24 @@
             this.Ukloni.UseColumnTextForButtonValue = true;
             this.Ukloni.Width = 47;
             // 
+            // btnReport
+            // 
+            this.btnReport.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnReport.Location = new System.Drawing.Point(731, 414);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(159, 23);
+            this.btnReport.TabIndex = 5;
+            this.btnReport.Text = "Izvještaj";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
             // frmFilmovi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(53)))), ((int)(((byte)(96)))));
             this.ClientSize = new System.Drawing.Size(897, 449);
+            this.Controls.Add(this.btnReport);
             this.Controls.Add(this.dgvFilmovi);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmFilmovi";
@@ -306,5 +319,6 @@
         private DataGridViewTextBoxColumn Cijena;
         private DataGridViewButtonColumn Uredi;
         private DataGridViewButtonColumn Ukloni;
+        private Button btnReport;
     }
 }

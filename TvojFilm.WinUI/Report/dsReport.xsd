@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsReport" targetNamespace="http://tempuri.org/dsReport.xsd" xmlns:mstns="http://tempuri.org/dsReport.xsd" xmlns="http://tempuri.org/dsReport.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsReport" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_UserDSName="dsReport" msprop:Generator_DataSetName="dsReport">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Filmovi" msprop:Generator_RowEvHandlerName="FilmoviRowChangeEventHandler" msprop:Generator_RowDeletedName="FilmoviRowDeleted" msprop:Generator_RowDeletingName="FilmoviRowDeleting" msprop:Generator_RowEvArgName="FilmoviRowChangeEvent" msprop:Generator_TablePropName="Filmovi" msprop:Generator_RowChangedName="FilmoviRowChanged" msprop:Generator_RowChangingName="FilmoviRowChanging" msprop:Generator_TableClassName="FilmoviDataTable" msprop:Generator_RowClassName="FilmoviRow" msprop:Generator_TableVarName="tableFilmovi" msprop:Generator_UserTableName="Filmovi">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="NazivFilma" msprop:Generator_ColumnPropNameInRow="NazivFilma" msprop:Generator_ColumnPropNameInTable="NazivFilmaColumn" msprop:Generator_ColumnVarNameInTable="columnNazivFilma" msprop:Generator_UserColumnName="NazivFilma" type="xs:string" minOccurs="0" />
+              <xs:element name="ImeRedatelja" msprop:Generator_ColumnPropNameInRow="ImeRedatelja" msprop:Generator_ColumnPropNameInTable="ImeRedateljaColumn" msprop:Generator_ColumnVarNameInTable="columnImeRedatelja" msprop:Generator_UserColumnName="ImeRedatelja" type="xs:string" minOccurs="0" />
+              <xs:element name="GlavniGlumac" msprop:Generator_ColumnPropNameInRow="GlavniGlumac" msprop:Generator_ColumnPropNameInTable="GlavniGlumacColumn" msprop:Generator_ColumnVarNameInTable="columnGlavniGlumac" msprop:Generator_UserColumnName="GlavniGlumac" type="xs:string" minOccurs="0" />
+              <xs:element name="Zemlja" msprop:Generator_ColumnPropNameInRow="Zemlja" msprop:Generator_ColumnPropNameInTable="ZemljaColumn" msprop:Generator_ColumnVarNameInTable="columnZemlja" msprop:Generator_UserColumnName="Zemlja" type="xs:string" minOccurs="0" />
+              <xs:element name="Zanr" msprop:Generator_ColumnPropNameInRow="Zanr" msprop:Generator_ColumnPropNameInTable="ZanrColumn" msprop:Generator_ColumnVarNameInTable="columnZanr" msprop:Generator_UserColumnName="Zanr" type="xs:string" minOccurs="0" />
+              <xs:element name="Ocjena" msprop:Generator_ColumnPropNameInRow="Ocjena" msprop:Generator_ColumnPropNameInTable="OcjenaColumn" msprop:Generator_ColumnVarNameInTable="columnOcjena" msprop:Generator_UserColumnName="Ocjena" type="xs:double" minOccurs="0" />
+              <xs:element name="Datum" msprop:Generator_ColumnPropNameInRow="Datum" msprop:Generator_ColumnPropNameInTable="DatumColumn" msprop:Generator_ColumnVarNameInTable="columnDatum" msprop:Generator_UserColumnName="Datum" type="xs:string" minOccurs="0" />
+              <xs:element name="Rb" msprop:Generator_ColumnPropNameInRow="Rb" msprop:Generator_ColumnPropNameInTable="RbColumn" msprop:Generator_ColumnVarNameInTable="columnRb" msprop:Generator_UserColumnName="Rb" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

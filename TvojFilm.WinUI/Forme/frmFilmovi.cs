@@ -123,5 +123,20 @@ namespace TvojFilm.WinUI.Forme
             frmDodajFilm frm = new frmDodajFilm(dgvFilmovi);
             frm.ShowDialog();
         }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            var dtoFilmovi = new dtoFilmovi()
+            {
+                Filmovi = dgvFilmovi.DataSource as List<Model.Filmovi>
+            };
+            frmReport frmR = new frmReport(dtoFilmovi);
+            frmR.ShowDialog();
+        }
+    }
+
+    public class dtoFilmovi
+    {
+        public List<Model.Filmovi> Filmovi { get; set; }
     }
 }
