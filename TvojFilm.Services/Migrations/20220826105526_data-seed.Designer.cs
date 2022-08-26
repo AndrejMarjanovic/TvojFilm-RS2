@@ -12,8 +12,8 @@ using TvojFilm.Services.Database;
 namespace TvojFilm.Services.Migrations
 {
     [DbContext(typeof(TvojFilmContext))]
-    [Migration("20220816151117_data_seed")]
-    partial class data_seed
+    [Migration("20220826105526_data-seed")]
+    partial class dataseed
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -245,7 +245,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmKomentarId = 1,
-                            DatumKomentara = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(7950),
+                            DatumKomentara = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4596),
                             FilmId = 1,
                             Komentar = "Odličan film...",
                             KorisnikId = 2
@@ -253,7 +253,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmKomentarId = 2,
-                            DatumKomentara = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(7961),
+                            DatumKomentara = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4600),
                             FilmId = 2,
                             Komentar = "Odličan film...!",
                             KorisnikId = 2
@@ -261,7 +261,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmKomentarId = 3,
-                            DatumKomentara = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(7966),
+                            DatumKomentara = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4604),
                             FilmId = 1,
                             Komentar = "Film je jako dobar, preporuke",
                             KorisnikId = 3
@@ -300,7 +300,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmOcjenaId = 1,
-                            DatumOcjene = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8021),
+                            DatumOcjene = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4624),
                             FilmId = 1,
                             KorisnikId = 2,
                             Ocjena = 4.5
@@ -308,7 +308,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmOcjenaId = 2,
-                            DatumOcjene = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8032),
+                            DatumOcjene = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4628),
                             FilmId = 2,
                             KorisnikId = 2,
                             Ocjena = 5.0
@@ -316,7 +316,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmOcjenaId = 3,
-                            DatumOcjene = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8040),
+                            DatumOcjene = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4631),
                             FilmId = 3,
                             KorisnikId = 3,
                             Ocjena = 4.0
@@ -324,7 +324,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmOcjenaId = 4,
-                            DatumOcjene = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8047),
+                            DatumOcjene = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4634),
                             FilmId = 4,
                             KorisnikId = 3,
                             Ocjena = 3.0
@@ -332,7 +332,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             FilmOcjenaId = 5,
-                            DatumOcjene = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8057),
+                            DatumOcjene = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4637),
                             FilmId = 5,
                             KorisnikId = 2,
                             Ocjena = 2.5
@@ -511,7 +511,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             KorisnikId = 1,
-                            DatumRodjenja = new DateTime(2022, 8, 16, 17, 11, 16, 996, DateTimeKind.Local).AddTicks(492),
+                            DatumRodjenja = new DateTime(2022, 8, 26, 12, 55, 25, 695, DateTimeKind.Local).AddTicks(4759),
                             Email = "admin@gmail.com",
                             GradId = 1,
                             Ime = "Admin",
@@ -525,21 +525,21 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             KorisnikId = 2,
-                            DatumRodjenja = new DateTime(2022, 8, 16, 17, 11, 16, 996, DateTimeKind.Local).AddTicks(564),
+                            DatumRodjenja = new DateTime(2022, 8, 26, 12, 55, 25, 695, DateTimeKind.Local).AddTicks(4807),
                             Email = "korisnik@gmail.com",
                             GradId = 1,
                             Ime = "Korisnik",
-                            PasswordHash = "Qj4tRfdk9QedcD4rlJDY34k/bvs=",
-                            PasswordSalt = "ee7RBRyG7y14O2KFDEhhtg==",
+                            PasswordHash = "4Q+m2CJFGHDHfkZwYyiDu7eJLAM=",
+                            PasswordSalt = "3i5f59BijRmLe2N+DMQxYw==",
                             Prezime = "Korisnik",
                             Telefon = "111000000",
                             UlogaId = 2,
-                            Username = "korisnik"
+                            Username = "korisnik1"
                         },
                         new
                         {
                             KorisnikId = 3,
-                            DatumRodjenja = new DateTime(2022, 8, 16, 17, 11, 16, 996, DateTimeKind.Local).AddTicks(575),
+                            DatumRodjenja = new DateTime(2022, 8, 26, 12, 55, 25, 695, DateTimeKind.Local).AddTicks(4811),
                             Email = "korisnik2@gmail.com",
                             GradId = 2,
                             Ime = "Korisnik2",
@@ -581,42 +581,42 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             KupnjaId = 1,
-                            DatumKupovine = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8119),
+                            DatumKupovine = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4729),
                             FilmId = 1,
                             KorisnikId = 2
                         },
                         new
                         {
                             KupnjaId = 2,
-                            DatumKupovine = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8129),
+                            DatumKupovine = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4734),
                             FilmId = 2,
                             KorisnikId = 2
                         },
                         new
                         {
                             KupnjaId = 3,
-                            DatumKupovine = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8140),
+                            DatumKupovine = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4737),
                             FilmId = 3,
                             KorisnikId = 3
                         },
                         new
                         {
                             KupnjaId = 4,
-                            DatumKupovine = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8144),
+                            DatumKupovine = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4740),
                             FilmId = 4,
                             KorisnikId = 3
                         },
                         new
                         {
                             KupnjaId = 5,
-                            DatumKupovine = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8154),
+                            DatumKupovine = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4743),
                             FilmId = 5,
                             KorisnikId = 2
                         },
                         new
                         {
                             KupnjaId = 6,
-                            DatumKupovine = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(8160),
+                            DatumKupovine = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4746),
                             FilmId = 1,
                             KorisnikId = 3
                         });
@@ -654,7 +654,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             PrijedlogId = 1,
-                            DatumPrijedloga = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(7814),
+                            DatumPrijedloga = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4532),
                             KorisnikId = 2,
                             Opis = "Coppolin klasik iz 1972.",
                             PrijedlogIme = "Kum"
@@ -662,7 +662,7 @@ namespace TvojFilm.Services.Migrations
                         new
                         {
                             PrijedlogId = 2,
-                            DatumPrijedloga = new DateTime(2022, 8, 16, 17, 11, 16, 997, DateTimeKind.Local).AddTicks(7875),
+                            DatumPrijedloga = new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4563),
                             KorisnikId = 3,
                             Opis = "Ratni film iz 2014.",
                             PrijedlogIme = "Fury"

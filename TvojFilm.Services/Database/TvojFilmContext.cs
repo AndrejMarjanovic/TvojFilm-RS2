@@ -134,9 +134,9 @@ namespace TvojFilm.Services.Database
                      Telefon = "111000000",
                      UlogaId = 2,
                      GradId = 1,
-                     Username = "korisnik",
-                     PasswordHash = "Qj4tRfdk9QedcD4rlJDY34k/bvs=",
-                     PasswordSalt = "ee7RBRyG7y14O2KFDEhhtg=="
+                     Username = "korisnik1",
+                     PasswordHash = "4Q+m2CJFGHDHfkZwYyiDu7eJLAM=",
+                     PasswordSalt = "3i5f59BijRmLe2N+DMQxYw=="
                  },
                  new Korisnici
                  {
