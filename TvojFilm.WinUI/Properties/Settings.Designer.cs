@@ -25,7 +25,7 @@ namespace TvojFilm.WinUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://localhost:7171/api")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5171/api")]
         public string ApiURL {
             get {
                 return ((string)(this["ApiURL"]));

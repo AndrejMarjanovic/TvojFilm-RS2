@@ -8,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Media;
 using TvojFilm.Model.Requests;
 using TvojFilm.WinUI.API;
 
@@ -22,7 +21,6 @@ namespace TvojFilm.WinUI.Forme
         private readonly APIService _filmovi = new APIService("Filmovi");
         private readonly APIService _zemlje = new APIService("Drzave");
         private int? _id = null;
-        private byte[] videoFile = null;
         private DataGridView? _dgvFilmovi = null;
         public frmDodajFilm(DataGridView? dgvFilmovi = null, int? id = null)
         {

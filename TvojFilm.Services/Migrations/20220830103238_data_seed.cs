@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TvojFilm.Services.Migrations
 {
-    public partial class dataseed : Migration
+    public partial class data_seed : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -96,26 +96,26 @@ namespace TvojFilm.Services.Migrations
             migrationBuilder.InsertData(
                 table: "Korisnici",
                 columns: new[] { "KorisnikId", "DatumRodjenja", "Email", "GradId", "Ime", "PasswordHash", "PasswordSalt", "Prezime", "Telefon", "UlogaId", "Username" },
-                values: new object[] { 1, new DateTime(2022, 8, 26, 12, 55, 25, 695, DateTimeKind.Local).AddTicks(4759), "admin@gmail.com", 1, "Admin", "NsWGalslR0eO9YFkWigokaLAptI=", "vpMs5Pc7Cwa2unN1GWcvXA==", "Admin", "000000000", 1, "admin" });
+                values: new object[] { 1, new DateTime(2022, 8, 30, 12, 32, 37, 411, DateTimeKind.Local).AddTicks(4179), "admin@gmail.com", 1, "Admin", "NsWGalslR0eO9YFkWigokaLAptI=", "vpMs5Pc7Cwa2unN1GWcvXA==", "Admin", "000000000", 1, "admin" });
 
             migrationBuilder.InsertData(
                 table: "Korisnici",
                 columns: new[] { "KorisnikId", "DatumRodjenja", "Email", "GradId", "Ime", "PasswordHash", "PasswordSalt", "Prezime", "Telefon", "UlogaId", "Username" },
-                values: new object[] { 2, new DateTime(2022, 8, 26, 12, 55, 25, 695, DateTimeKind.Local).AddTicks(4807), "korisnik@gmail.com", 1, "Korisnik", "4Q+m2CJFGHDHfkZwYyiDu7eJLAM=", "3i5f59BijRmLe2N+DMQxYw==", "Korisnik", "111000000", 2, "korisnik1" });
+                values: new object[] { 2, new DateTime(2022, 8, 30, 12, 32, 37, 411, DateTimeKind.Local).AddTicks(4238), "korisnik@gmail.com", 1, "Korisnik", "4Q+m2CJFGHDHfkZwYyiDu7eJLAM=", "3i5f59BijRmLe2N+DMQxYw==", "Korisnik", "111000000", 2, "korisnik1" });
 
             migrationBuilder.InsertData(
                 table: "Korisnici",
                 columns: new[] { "KorisnikId", "DatumRodjenja", "Email", "GradId", "Ime", "PasswordHash", "PasswordSalt", "Prezime", "Telefon", "UlogaId", "Username" },
-                values: new object[] { 3, new DateTime(2022, 8, 26, 12, 55, 25, 695, DateTimeKind.Local).AddTicks(4811), "korisnik2@gmail.com", 2, "Korisnik2", "lkPjzvRUL/yqjKIRYIikqh/gIwc=", "G8EKrXwcUxdyGYHs7mcEIw==", "Korisnik2", "222000000", 2, "korisnik2" });
+                values: new object[] { 3, new DateTime(2022, 8, 30, 12, 32, 37, 411, DateTimeKind.Local).AddTicks(4244), "korisnik2@gmail.com", 2, "Korisnik2", "lkPjzvRUL/yqjKIRYIikqh/gIwc=", "G8EKrXwcUxdyGYHs7mcEIw==", "Korisnik2", "222000000", 2, "korisnik2" });
 
             migrationBuilder.InsertData(
                 table: "FilmoviKomentari",
                 columns: new[] { "FilmKomentarId", "DatumKomentara", "FilmId", "Komentar", "KorisnikId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4596), 1, "Odličan film...", 2 },
-                    { 2, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4600), 2, "Odličan film...!", 2 },
-                    { 3, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4604), 1, "Film je jako dobar, preporuke", 3 }
+                    { 1, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(840), 1, "Odličan film...", 2 },
+                    { 2, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(847), 2, "Odličan film...!", 2 },
+                    { 3, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(867), 1, "Film je jako dobar, preporuke", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -123,11 +123,11 @@ namespace TvojFilm.Services.Migrations
                 columns: new[] { "FilmOcjenaId", "DatumOcjene", "FilmId", "KorisnikId", "Ocjena" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4624), 1, 2, 4.5 },
-                    { 2, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4628), 2, 2, 5.0 },
-                    { 3, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4631), 3, 3, 4.0 },
-                    { 4, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4634), 4, 3, 3.0 },
-                    { 5, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4637), 5, 2, 2.5 }
+                    { 1, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(903), 1, 2, 4.5 },
+                    { 2, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(910), 2, 2, 5.0 },
+                    { 3, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(916), 3, 3, 4.0 },
+                    { 4, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(921), 4, 3, 3.0 },
+                    { 5, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(925), 5, 2, 2.5 }
                 });
 
             migrationBuilder.InsertData(
@@ -135,12 +135,12 @@ namespace TvojFilm.Services.Migrations
                 columns: new[] { "KupnjaId", "DatumKupovine", "FilmId", "KorisnikId" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4729), 1, 2 },
-                    { 2, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4734), 2, 2 },
-                    { 3, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4737), 3, 3 },
-                    { 4, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4740), 4, 3 },
-                    { 5, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4743), 5, 2 },
-                    { 6, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4746), 1, 3 }
+                    { 1, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(966), 1, 2 },
+                    { 2, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(973), 2, 2 },
+                    { 3, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(978), 3, 3 },
+                    { 4, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(984), 4, 3 },
+                    { 5, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(989), 5, 2 },
+                    { 6, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(994), 1, 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -148,8 +148,8 @@ namespace TvojFilm.Services.Migrations
                 columns: new[] { "PrijedlogId", "DatumPrijedloga", "KorisnikId", "Opis", "PrijedlogIme" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4532), 2, "Coppolin klasik iz 1972.", "Kum" },
-                    { 2, new DateTime(2022, 8, 26, 12, 55, 25, 696, DateTimeKind.Local).AddTicks(4563), 3, "Ratni film iz 2014.", "Fury" }
+                    { 1, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(772), 2, "Coppolin klasik iz 1972.", "Kum" },
+                    { 2, new DateTime(2022, 8, 30, 12, 32, 37, 414, DateTimeKind.Local).AddTicks(800), 3, "Ratni film iz 2014.", "Fury" }
                 });
         }
 
