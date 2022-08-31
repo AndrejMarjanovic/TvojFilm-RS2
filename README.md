@@ -23,6 +23,13 @@
     Lozinka: test                                   Lozinka: test 
     ```    
 
+- Pdatci za PayPal testni account
+
+    ```
+    Adresa: sb-rimhg20216550@personal.example.com                 
+    Lozinka: gu}0KS*O                               
+    ```    
+
 
 ## Pokretanje aplikacija
 1. Kloniranje repozitorija
